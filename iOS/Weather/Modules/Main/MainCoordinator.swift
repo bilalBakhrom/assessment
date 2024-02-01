@@ -7,9 +7,19 @@
 
 import Foundation
 import AppBaseController
+import AppSettings
 
 public struct MainDependency {
+    public let applicationSettings: ApplicationSettings
+    public let locationManager: LocationManager
     
+    public init(
+        applicationSettings: ApplicationSettings,
+        locationManager: LocationManager
+    ) {
+        self.applicationSettings = applicationSettings
+        self.locationManager = locationManager
+    }
 }
 
 public final class MainCoordinator: BaseCoordinator {

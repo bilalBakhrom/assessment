@@ -11,9 +11,14 @@ import AppSettings
 
 public struct RootCoordinatorDependency {
     public let applicationSettings: ApplicationSettings
+    public let locationManager: LocationManager
     
-    public init(applicationSettings: ApplicationSettings) {
+    public init(
+        applicationSettings: ApplicationSettings,
+        locationManager: LocationManager
+    ) {
         self.applicationSettings = applicationSettings
+        self.locationManager = locationManager
     }
 }
 
@@ -40,7 +45,8 @@ public final class RootCoordinator: Coordinator {
         window.makeKeyAndVisible()
         
         let dependency = TabBarDependency(
-            applicationSettings: dependency.applicationSettings
+            applicationSettings: dependency.applicationSettings,
+            locationManager: dependency.locationManager
         )
         let coordinator = TabBarCoordinator(
             dependency,

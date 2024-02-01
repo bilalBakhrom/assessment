@@ -18,9 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         let applicationSettings = ApplicationSettings.shared
+        let locationManager = LocationManager()
         
         let dependency = RootCoordinatorDependency(
-            applicationSettings: applicationSettings
+            applicationSettings: applicationSettings,
+            locationManager: locationManager
         )
         
         rootCoordinator = RootCoordinator(

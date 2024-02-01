@@ -14,7 +14,10 @@ public final class TabBarController: BaseTabBarController {
     private let viewModel: TabBarViewModel
     
     private lazy var mainViewController: UIViewController = {
-        let dependency = MainDependency()
+        let dependency = MainDependency(
+            applicationSettings: viewModel.applicationSettings,
+            locationManager: viewModel.locationManager
+        )
         let navController = BaseNavigationController()
         navController.tabBarItem = .createTabBarItem(for: .main)
         

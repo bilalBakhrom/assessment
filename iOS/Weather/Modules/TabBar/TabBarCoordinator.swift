@@ -11,9 +11,14 @@ import AppSettings
 
 public struct TabBarDependency {
     public let applicationSettings: ApplicationSettings
+    public let locationManager: LocationManager
     
-    public init(applicationSettings: ApplicationSettings) {
+    public init(
+        applicationSettings: ApplicationSettings,
+        locationManager: LocationManager
+    ) {
         self.applicationSettings = applicationSettings
+        self.locationManager = locationManager
     }
 }
 

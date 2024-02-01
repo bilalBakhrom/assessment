@@ -15,6 +15,8 @@ final class MainController: BaseViewController {
     
     private lazy var rootView: UIView = {
         let swiftUIView = MainView(viewModel: viewModel)
+            .environmentObject(viewModel.locationManager)
+        
         let hostingController = UIHostingController(rootView: swiftUIView)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -31,12 +33,22 @@ final class MainController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupSubviews()
+        Task { await performInitialRequests() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
+    }
+    
+    override func performInitialRequests() async {
+        if viewModel.locationManager.isAuthorized {
+            await viewModel.sendEvent(.startUpdatingLocation)
+        } else {
+            await viewModel.sendEvent(.requestLocationAuthorization)
+        }
     }
     
     // MARK: - Layout
