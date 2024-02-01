@@ -15,7 +15,8 @@ let package = Package(
         .package(path: "../AppFoundation"),
         .package(path: "../AppColors"),
         .package(path: "../AppNetwork"),
-        .package(path: "../AppModels")
+        .package(path: "../AppModels"),
+        .package(path: "../AppSettings"),
     ],
     targets: [
         .target(
@@ -24,7 +25,8 @@ let package = Package(
                 "AppFoundation",
                 "AppColors",
                 "AppNetwork",
-                "AppModels"
+                "AppModels",
+                "AppSettings"
             ]
         ),
         .testTarget(
