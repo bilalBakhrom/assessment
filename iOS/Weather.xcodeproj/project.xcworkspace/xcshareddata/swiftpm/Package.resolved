@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "networkfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bilalBakhrom/NetworkFoundation",
+      "state" : {
+        "revision" : "57681b914db0a7af738499f189621867e583ce74",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}
