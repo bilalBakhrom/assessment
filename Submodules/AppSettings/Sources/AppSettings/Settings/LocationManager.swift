@@ -7,13 +7,13 @@
 
 import Foundation
 import CoreLocation
+import AppModels
 
 public final class LocationManager: NSObject, ObservableObject {
     @Published public var locationStatus: CLAuthorizationStatus
     @Published public var lastLocation: CLLocation?
     @Published public var placeMark: CLPlacemark?
-    @Published public var latitude: Double = 0
-    @Published public var longitude: Double = 0
+    @Published public var location = AppCoordinates(lat: 0, lon: 0)
     
     private var locationManager: CLLocationManager
     
@@ -54,10 +54,22 @@ public final class LocationManager: NSObject, ObservableObject {
             }
             
             self?.placeMark = placemarks?.first
-            
-            if let placeMark = self?.placeMark, let lastLocation = self?.lastLocation {
-                print("PLACE: \(placeMark), lastLocation: \(lastLocation)")
-            }
+        }
+    }
+    
+    @MainActor
+    private func handleLocations(_ locations: [CLLocation]) async {
+        guard let location = locations.last else { return }
+        
+        self.location = AppCoordinates(
+            lat: location.coordinate.latitude,
+            lon: location.coordinate.longitude
+        )
+        self.lastLocation = location
+        
+        // Get location details
+        if let lastLocation = lastLocation {
+            fetchLocationDetails(for: lastLocation)
         }
     }
 }
@@ -73,19 +85,6 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                latitude = location.coordinate.latitude
-                longitude = location.coordinate.longitude
-                lastLocation = location
-            }
-        }
-        
-        // Get location details
-        if let lastLocation = lastLocation {
-            fetchLocationDetails(for: lastLocation)
-        }
+        Task { await handleLocations(locations) }
     }
 }

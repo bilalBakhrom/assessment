@@ -34,6 +34,7 @@ final class MainController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setupSubviews()
         Task { await performInitialRequests() }
     }
@@ -41,6 +42,20 @@ final class MainController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
+    }
+    
+    // MARK: - BINDER
+    
+    override func bind() {
+        viewModel.locationManager.$location
+            .sink { [weak self] location in
+                guard let self else { return }
+                
+                Task {
+                    await self.viewModel.sendEvent(.fetchWeatherDetails(location: location))
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     override func performInitialRequests() async {
@@ -59,10 +74,10 @@ final class MainController: BaseViewController {
     
     override func activateSubviewsConstraints() {
         NSLayoutConstraint.activate([
-            rootView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            rootView.topAnchor.constraint(equalTo: view.topAnchor),
             rootView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             rootView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            rootView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            rootView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

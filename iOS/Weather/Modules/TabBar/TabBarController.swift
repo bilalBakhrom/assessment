@@ -7,6 +7,7 @@
 
 import UIKit
 import AppBaseController
+import CoreLocation
 
 public final class TabBarController: BaseTabBarController {
     // MARK: - Properties
@@ -49,6 +50,7 @@ public final class TabBarController: BaseTabBarController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setViewControllers([mainViewController, forecastViewController], animated: false)
     }
     
@@ -56,5 +58,21 @@ public final class TabBarController: BaseTabBarController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    // MARK: - BINDER
+    
+    public override func bind() {
+        viewModel.locationManager.$locationStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                guard let self else { return }
+                handleLocationStatus(status)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func handleLocationStatus(_ status: CLAuthorizationStatus) {
+        tabBar.isHidden = (status == .denied) || (status == .restricted)
     }
 }

@@ -8,17 +8,21 @@
 import Foundation
 import AppBaseController
 import AppSettings
+import AppNetwork
 
 public struct MainDependency {
     public let applicationSettings: ApplicationSettings
     public let locationManager: LocationManager
+    public let weatherRepo: WeatherRepoProtocol
     
     public init(
         applicationSettings: ApplicationSettings,
-        locationManager: LocationManager
+        locationManager: LocationManager,
+        weatherRepo: WeatherRepoProtocol = WeatherRepo()
     ) {
         self.applicationSettings = applicationSettings
         self.locationManager = locationManager
+        self.weatherRepo = weatherRepo
     }
 }
 

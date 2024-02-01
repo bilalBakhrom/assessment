@@ -11,10 +11,6 @@ import NetworkFoundation
 public protocol ANBaseRouterProtocol: RouterProtocol {}
 
 extension ANBaseRouterProtocol {
-    public var host: String {
-        return ""
-    }
-    
     public var headers: HTTPHeaders {
         return HTTPHeaders()
     }

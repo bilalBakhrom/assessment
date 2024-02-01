@@ -465,6 +465,7 @@
 				DEVELOPMENT_TEAM = 58CQ2925XJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Weather";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Our app uses your location to provide personalized content and recommendations based on where you are. This helps us to enhance your experience by offering location-specific services, such as finding nearby points of interest, local weather updates, and tailored suggestions.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Our app uses your location to provide personalized content and recommendations based on where you are. This helps us to enhance your experience by offering location-specific services, such as finding nearby points of interest, local weather updates, and tailored suggestions.";
@@ -497,6 +498,7 @@
 				DEVELOPMENT_TEAM = 58CQ2925XJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Weather";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Our app uses your location to provide personalized content and recommendations based on where you are. This helps us to enhance your experience by offering location-specific services, such as finding nearby points of interest, local weather updates, and tailored suggestions.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Our app uses your location to provide personalized content and recommendations based on where you are. This helps us to enhance your experience by offering location-specific services, such as finding nearby points of interest, local weather updates, and tailored suggestions.";
