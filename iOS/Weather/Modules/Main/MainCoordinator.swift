@@ -14,15 +14,18 @@ public struct MainDependency {
     public let applicationSettings: ApplicationSettings
     public let locationManager: LocationManager
     public let weatherRepo: WeatherRepoProtocol
+    public let geocodingRepo: GeocodingRepoProtocol
     
     public init(
         applicationSettings: ApplicationSettings,
         locationManager: LocationManager,
-        weatherRepo: WeatherRepoProtocol = WeatherRepo()
+        weatherRepo: WeatherRepoProtocol = WeatherRepo(),
+        geocodingRepo: GeocodingRepoProtocol = GeocodingRepo()
     ) {
         self.applicationSettings = applicationSettings
         self.locationManager = locationManager
         self.weatherRepo = weatherRepo
+        self.geocodingRepo = geocodingRepo
     }
 }
 

@@ -33,4 +33,21 @@ public extension ApplicationSettings {
         get { UIUserInterfaceStyle(rawValue: storage.integer(forKey: .userInterfaceStyle))! }
         set { storage.set(newValue.rawValue, forKey: .userInterfaceStyle) }
     }
+    
+    var userSelectedCity: City? {
+        get {
+            guard let data = storage.data(forKey: .userSelectedCity) else {
+                return nil
+            }
+            
+            return try? JSONDecoder().decode(City.self, from: data)
+        }
+        set {
+            guard let city = newValue,
+                  let data = try? JSONEncoder().encode(city)
+            else { return }
+            
+            storage.set(data, forKey: .userSelectedCity)
+        }
+    }
 }
