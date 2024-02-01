@@ -8,10 +8,10 @@
 import Foundation
 import AppBaseController
 
-final class TabBarViewModel: BaseViewModel {
+public final class TabBarViewModel: BaseViewModel {
     private let coordinator: TabBarCoordinator
     
-    init(coordinator: TabBarCoordinator) {
+    public init(coordinator: TabBarCoordinator) {
         self.coordinator = coordinator
     }
 }

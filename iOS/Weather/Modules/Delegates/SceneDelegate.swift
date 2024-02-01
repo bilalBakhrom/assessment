@@ -6,13 +6,29 @@
 //
 
 import UIKit
+import AppSettings
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
-
+    var rootCoordinator: RootCoordinator?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        
+        let applicationSettings = ApplicationSettings.shared
+        
+        let dependency = RootCoordinatorDependency(
+            applicationSettings: applicationSettings
+        )
+        
+        rootCoordinator = RootCoordinator(
+            window: window,
+            dependency: dependency
+        )
+        
+        rootCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {}

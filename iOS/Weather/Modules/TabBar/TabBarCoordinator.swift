@@ -7,9 +7,14 @@
 
 import Foundation
 import AppBaseController
+import AppSettings
 
 public struct TabBarDependency {
+    public let applicationSettings: ApplicationSettings
     
+    public init(applicationSettings: ApplicationSettings) {
+        self.applicationSettings = applicationSettings
+    }
 }
 
 public final class TabBarCoordinator: BaseCoordinator {

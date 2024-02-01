@@ -8,7 +8,7 @@
 import UIKit
 import AppBaseController
 
-final class TabBarController: BaseTabBarController {
+public final class TabBarController: BaseTabBarController {
     // MARK: - Properties
     
     private let viewModel: TabBarViewModel
@@ -35,15 +35,21 @@ final class TabBarController: BaseTabBarController {
     
     // MARK: - Initialization
     
-    init(viewModel: TabBarViewModel) {
+    public init(viewModel: TabBarViewModel) {
         self.viewModel = viewModel
     }
     
     // MARK: - Lifecycle
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         setViewControllers([mainViewController, forecastViewController], animated: false)
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
