@@ -34,6 +34,11 @@ final class MainController: BaseViewController {
         setupSubviews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideNavigationBar()
+    }
+    
     // MARK: - Layout
     
     override func embedSubviews() {

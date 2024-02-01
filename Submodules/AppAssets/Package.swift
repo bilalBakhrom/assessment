@@ -20,7 +20,8 @@ let package = Package(
             name: "AppAssets",
             dependencies: [
                 "AppFoundation"
-            ]
+            ],
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "AppAssetsTests",

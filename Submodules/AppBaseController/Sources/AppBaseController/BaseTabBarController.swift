@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import AppModels
+import AppColors
 
 open class BaseTabBarController: NiblessTabBarController {
     /// Set of Combine cancellables for managing subscriptions.
@@ -19,6 +20,21 @@ open class BaseTabBarController: NiblessTabBarController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
+    }
+    
+    private func initialize() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .moduleTabBarBackground // Set your custom color
+        appearance.selectionIndicatorTintColor = .moduleAccent
+        
+        // Set both the standardAppearance and scrollEdgeAppearance
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        
+        // Update tint color.
+        tabBar.tintColor = .moduleAccent
     }
     
     // MARK: - BINDER

@@ -14,6 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../AppFoundation"),
+        .package(path: "../AppAssets"),
         .package(path: "../AppNetwork"),
     ],
     targets: [
@@ -21,6 +22,7 @@ let package = Package(
             name: "AppModels",
             dependencies: [
                 "AppFoundation",
+                "AppAssets",
                 "AppNetwork"
             ]
         ),

@@ -18,7 +18,7 @@ public final class ApplicationSettings {
         storage = StorageKeyDefaults(suiteName: "group.com.deeptechuz.kegelfit")
         storage.register(defaults: [
             .isFirstLaunch: true,
-            .userInterfaceStyle: UIScreen.main.traitCollection.userInterfaceStyle.rawValue,
+            .userInterfaceStyle: UIUserInterfaceStyle.dark.rawValue,
         ])
     }
 }

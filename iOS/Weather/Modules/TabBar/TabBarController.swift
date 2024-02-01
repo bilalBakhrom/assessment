@@ -16,6 +16,7 @@ public final class TabBarController: BaseTabBarController {
     private lazy var mainViewController: UIViewController = {
         let dependency = MainDependency()
         let navController = BaseNavigationController()
+        navController.tabBarItem = .createTabBarItem(for: .main)
         
         let coordinator = MainCoordinator(dependency, navigationController: navController)
         coordinator.start()
@@ -26,6 +27,7 @@ public final class TabBarController: BaseTabBarController {
     private lazy var forecastViewController: UIViewController = {
         let dependency = ForecastDependency()
         let navController = BaseNavigationController()
+        navController.tabBarItem = .createTabBarItem(for: .forecast)
         
         let coordinator = ForecastCoordinator(dependency, navigationController: navController)
         coordinator.start()
