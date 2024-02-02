@@ -7,9 +7,23 @@
 
 import Foundation
 import AppBaseController
+import AppSettings
+import AppNetwork
 
 public struct ForecastDependency {
+    public let applicationSettings: ApplicationSettings
+    public let locationManager: LocationManager
+    public let weatherRepo: WeatherRepoProtocol
     
+    public init(
+        applicationSettings: ApplicationSettings, 
+        locationManager: LocationManager,
+        weatherRepo: WeatherRepoProtocol = WeatherRepo()
+    ) {
+        self.applicationSettings = applicationSettings
+        self.locationManager = locationManager
+        self.weatherRepo = weatherRepo
+    }
 }
 
 public final class ForecastCoordinator: BaseCoordinator {

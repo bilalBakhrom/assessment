@@ -9,6 +9,7 @@ import Foundation
 
 public protocol WeatherRepoProtocol {
     func fetchWeatherDetails(with model: RMLocation) async throws -> ANWeatherDetails
+    func fetchForecast(model: RMForecast) async throws -> ANForecastContent
 }
 
 public final class WeatherRepo: WeatherRepoProtocol {
@@ -20,5 +21,9 @@ public final class WeatherRepo: WeatherRepoProtocol {
     
     public func fetchWeatherDetails(with model: RMLocation) async throws -> ANWeatherDetails {
         try await _service.fetchWeatherDetails(with: model)
+    }
+    
+    public func fetchForecast(model: RMForecast) async throws -> ANForecastContent {
+        try await _service.fetchForecast(model: model)
     }
 }

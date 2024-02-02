@@ -11,5 +11,6 @@ public struct ANCity: Codable {
     public var name: String?
     public var lat: Double?
     public var lon: Double?
+    public var coord: ANCoord?
     public var country: String?
 }

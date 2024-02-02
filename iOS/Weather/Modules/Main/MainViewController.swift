@@ -47,7 +47,8 @@ final class MainController: BaseViewController {
     // MARK: - BINDER
     
     override func bind() {
-        viewModel.locationManager.$location
+        viewModel.locationManager
+            .$location
             .sink { [weak self] location in
                 guard let self else { return }
                 

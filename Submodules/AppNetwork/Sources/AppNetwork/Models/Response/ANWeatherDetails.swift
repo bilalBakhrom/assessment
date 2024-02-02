@@ -25,17 +25,6 @@ public struct ANWeatherDetails: Codable {
     public var cod: Int?
 }
 
-// MARK: - Coord
-public struct ANCoord: Codable {
-    public var lon, lat: Double?
-}
-
-// MARK: - Weather
-public struct ANWeather: Codable {
-    public var id: Int?
-    public var main, description, icon: String?
-}
-
 // MARK: - Main
 public struct ANMain: Codable {
     public var temp, feelsLike, tempMin, tempMax: Double?

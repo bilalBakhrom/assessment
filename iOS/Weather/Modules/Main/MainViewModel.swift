@@ -27,7 +27,6 @@ final class MainViewModel: BaseViewModel {
     private let coordinator: MainCoordinator
     private let weatherRepo: WeatherRepoProtocol
     private let geocodingRepo: GeocodingRepoProtocol
-    private let appID = "40ac8526be74697237353948e35b0053"
     
     var hasSelectedCity: Bool {
         selectedCity != nil
@@ -121,7 +120,7 @@ extension MainViewModel {
         isFetchingWeatherDetails = true
         
         do {
-            let model = RMLocation(lat: lat, lon: lon, appID: appID)
+            let model = RMLocation(lat: lat, lon: lon)
             let response = try await weatherRepo.fetchWeatherDetails(with: model)
             weatherDetails = WeatherDetails(from: response)
         } catch {
@@ -137,7 +136,7 @@ extension MainViewModel {
         isFetchingCities = true
         
         do {
-            let model = RMGeocoding(query: query, appid: appID)
+            let model = RMGeocoding(query: query)
             let response = try await geocodingRepo.fetchCities(with: model)
             cities = response.map({ City(from: $0) })
         } catch {

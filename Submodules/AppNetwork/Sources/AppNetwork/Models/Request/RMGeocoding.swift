@@ -12,10 +12,10 @@ public struct RMGeocoding: Codable {
     public var appid: String
     public var limit: Int
     
-    public init(query: String, appid: String, limit: Int = 10) {
+    public init(query: String, limit: Int = 10, appID: String? = nil) {
         self.query = query
-        self.appid = appid
         self.limit = limit
+        self.appid = appID ?? NetworkSettings.shared.appID
     }
 }
 

@@ -11,21 +11,13 @@ public struct RMLocation: Codable {
     public let lat: Double
     public let lon: Double
     public let appID: String
-    public let units: Units
+    public let units: RMUnits
     
-    public init(lat: Double, lon: Double, appID: String, units: Units = .metric) {
+    public init(lat: Double, lon: Double, units: RMUnits = .metric, appID: String? = nil) {
         self.lat = lat
         self.lon = lon
-        self.appID = appID
         self.units = units
-    }
-}
-
-extension RMLocation {
-    public enum Units: String, Codable {
-        case standard
-        case metric
-        case imperial
+        self.appID = appID ?? NetworkSettings.shared.appID
     }
 }
 

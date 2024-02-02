@@ -29,7 +29,10 @@ public final class TabBarController: BaseTabBarController {
     }()
     
     private lazy var forecastViewController: UIViewController = {
-        let dependency = ForecastDependency()
+        let dependency = ForecastDependency(
+            applicationSettings: viewModel.applicationSettings,
+            locationManager: viewModel.locationManager
+        )
         let navController = BaseNavigationController()
         navController.tabBarItem = .createTabBarItem(for: .forecast)
         

@@ -31,12 +31,29 @@ final class ForecastController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind()
         setupSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideNavigationBar()
+    }
+    
+    // MARK: - BINDER
+    
+    override func bind() {
+        viewModel.locationManager
+            .$location
+            .sink { [weak self] location in
+                guard let self else { return }
+                
+                Task {
+                    await self.viewModel.sendEvent(.fetchForecastData(location: location))
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Layout
