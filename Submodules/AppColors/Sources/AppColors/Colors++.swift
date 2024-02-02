@@ -40,32 +40,8 @@ extension Color {
         Color("ModuleRedColor", bundle: .module)
     }
     
-    public static var moduleMainBlue: Color {
-        Color("ModuleBlueColor", bundle: .module)
-    }
-    
-    public static var moduleCardinal: Color {
-        Color("ModuleCardinalColor", bundle: .module)
-    }
-    
-    public static var moduleDarkGradient: Color {
-        Color("ModuleDarkGradient", bundle: .module)
-    }
-    
-    public static var moduleSecondaryRed: Color {
-        Color("ModuleSecondaryRed", bundle: .module)
-    }
-    
-    public static var moduleDarkGradient2: Color {
-        Color("ModuleDarkGradient2", bundle: .module)
-    }
-    
     public static var moduleGreen: Color {
         Color("ModuleColorGreen", bundle: .module)
-    }
-    
-    public static var moduleGreenMindaro: Color {
-        Color("ModuleGreenMindaro", bundle: .module)
     }
     
     public static var moduleGray: Color {

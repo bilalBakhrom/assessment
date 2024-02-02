@@ -19,7 +19,7 @@ extension AppNotificationName where Self: RawRepresentable, RawValue == String {
 }
 
 public enum AppNotification: String, AppNotificationName {
-    case didChangeApp
+    case didSelectCity
     
     public var key: String { rawValue }
 }

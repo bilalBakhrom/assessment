@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppFoundation
 import AppBaseController
 import AppSettings
 import AppNetwork
@@ -20,7 +21,7 @@ final class MainViewModel: BaseViewModel {
     @Published var isLocationPickerPresented: Bool = false
     @Published var cities: [City] = []
     @Published var selectedCity: City?
-
+    
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
     
@@ -72,9 +73,11 @@ extension MainViewModel {
     func sendEvent(_ event: ViewEvent) async {
         switch event {
         case .fetchCities(let query):
+            // Handle fetching cities based on a given query string.
             await fetchCities(with: query)
             
         case .fetchWeatherDetails(let location):
+            // Fetch weather details for a given location or selected city.
             if let city = selectedCity {
                 await fetchWeatherDetails(lat: city.lat, lon: city.lon)
             } else {
@@ -82,31 +85,53 @@ extension MainViewModel {
             }
             
         case .openSettings:
+            // Open application settings, typically to allow the user to change location permissions.
             openSettings()
             
         case .onTapChange:
+            // Handle the event when the user taps to change the location manually.
             isLocationPickerPresented = true
             
         case .onTapCity(let city):
-            selectedCity = city
-            applicationSettings.userSelectedCity = city
-            isLocationPickerPresented = false
-            cities = []
-            query = ""
-            await fetchWeatherDetails(lat: city.lat, lon: city.lon)
+            await handleCitySelection(city)
             
         case .requestLocationAuthorization:
+            // Requests authorization to access the user's location.
             locationManager.requestLocationAuthorization()
             
         case .removeSelectedCity:
-            selectedCity = nil
-            applicationSettings.userSelectedCity = nil
-            let location = locationManager.location
-            await fetchWeatherDetails(lat: location.lat, lon: location.lon)
+            await handleCityRemoval()
             
         case .startUpdatingLocation:
+            // Starts updating the user's location to provide up-to-date weather information.
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    private func handleCitySelection(_ city: City) async {
+        // Handle the event when a city is selected from the list.
+        // Updates the selected city, application settings, and notifies others of the selection.
+        selectedCity = city
+        applicationSettings.userSelectedCity = city
+        NotificationCenter.default.post(appNotif: .didSelectCity, object: city)
+        
+        // Dismisses the location picker.
+        isLocationPickerPresented = false
+        
+        // Clear query.
+        cities = []
+        query = ""
+        
+        // Fetch weather details for the selected city.
+        await fetchWeatherDetails(lat: city.lat, lon: city.lon)
+    }
+    
+    private func handleCityRemoval() async {
+        // Removes the currently selected city and fetches weather details for the current location.
+        selectedCity = nil
+        applicationSettings.userSelectedCity = nil
+        let location = locationManager.location
+        await fetchWeatherDetails(lat: location.lat, lon: location.lon)
     }
 }
 
@@ -116,7 +141,7 @@ extension MainViewModel {
 extension MainViewModel {
     private func fetchWeatherDetails(lat: Double, lon: Double) async {
         guard !isFetchingWeatherDetails else { return }
-
+        
         isFetchingWeatherDetails = true
         
         do {

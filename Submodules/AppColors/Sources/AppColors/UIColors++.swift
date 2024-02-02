@@ -40,32 +40,8 @@ extension UIColor {
         fetchColor("ModuleRedColor")
     }
     
-    public static var moduleMainBlue: UIColor {
-        fetchColor("ModuleBlueColor")
-    }
-    
-    public static var moduleCardinal: UIColor {
-        fetchColor("ModuleCardinalColor")
-    }
-    
-    public static var moduleDarkGradient: UIColor {
-        fetchColor("ModuleDarkGradient")
-    }
-    
-    public static var moduleSecondaryRed: UIColor {
-        fetchColor("ModuleSecondaryRed")
-    }
-    
-    public static var moduleDarkGradient2: UIColor {
-        fetchColor("ModuleDarkGradient2")
-    }
-    
     public static var moduleGreen: UIColor {
         fetchColor("ModuleColorGreen")
-    }
-    
-    public static var moduleGreenMindaro: UIColor {
-        fetchColor("ModuleGreenMindaro")
     }
     
     public static var moduleGray: UIColor {
