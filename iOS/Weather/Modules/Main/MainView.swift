@@ -69,13 +69,24 @@ struct MainView: View {
             }
             .padding(.top, 60 + safeAreaInsets.top)
             
-            if !viewModel.isFetchingWeatherDetails {
-                Text(viewModel.weatherDetails?.recommendation ?? "")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.modulePrimaryLabel)
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 40)
+            HStack(spacing: 12) {
+                if let url = viewModel.weatherDetails?.iconURL {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 40, height: 40)
+                }
+                
+                if !viewModel.isFetchingWeatherDetails {
+                    Text(viewModel.weatherDetails?.recommendation ?? "")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color.modulePrimaryLabel)
+                        .multilineTextAlignment(.center)                        
+                }
             }
+            .padding(.vertical, 40)
             
             VStack(spacing: 8) {
                 Button {

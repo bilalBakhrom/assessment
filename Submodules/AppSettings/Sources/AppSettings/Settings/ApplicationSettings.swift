@@ -15,7 +15,7 @@ public final class ApplicationSettings {
     private let storage: StorageKeyDefaults<ApplicationStorageKey>
     
     private init() {
-        storage = StorageKeyDefaults(suiteName: "group.com.deeptechuz.kegelfit")
+        storage = StorageKeyDefaults(suiteName: "group.com")
         storage.register(defaults: [
             .isFirstLaunch: true,
             .userInterfaceStyle: UIUserInterfaceStyle.dark.rawValue,

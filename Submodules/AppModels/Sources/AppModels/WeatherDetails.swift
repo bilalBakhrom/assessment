@@ -33,6 +33,11 @@ public struct WeatherDetails: Codable {
         Int(main?.tempMin ?? 0)
     }
     
+    public var iconURL: URL? {
+        guard let icon = weather?.first?.icon else { return nil }            
+        return URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png")
+    }
+    
     public var recommendation: String {
         switch temp {
         case ..<0:
