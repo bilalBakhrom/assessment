@@ -37,7 +37,7 @@ final class ForecastViewModel: BaseViewModel {
 
 extension ForecastViewModel {
     enum ViewEvent {
-        case fetchForecastData(location: AppCoordinates)
+        case fetchForecastData(location: AppCoordinates? = nil)
     }
 }
 
@@ -50,7 +50,7 @@ extension ForecastViewModel {
         case .fetchForecastData(let location):
             if let city = applicationSettings.userSelectedCity {
                 await fetchForecastData(lat: city.lat, lon: city.lon)
-            } else {
+            } else if let location {
                 await fetchForecastData(lat: location.lat, lon: location.lon)
             }
         }

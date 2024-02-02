@@ -61,6 +61,17 @@ final class ForecastController: BaseViewController {
                 self?.showError(with: content)
             }
             .store(in: &subscriptions)
+        
+        NotificationCenter.default
+            .publisher(appNotif: .didSelectCity)
+            .sink { [weak self] notification in
+                guard let self else { return }
+                
+                Task {
+                    await self.viewModel.sendEvent(.fetchForecastData())
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Layout

@@ -156,7 +156,7 @@ extension MainViewModel {
     }
     
     private func fetchCities(with query: String) async {
-        guard !isFetchingCities else { return }
+        guard !isFetchingCities, !query.isEmpty else { return }
         
         isFetchingCities = true
         
