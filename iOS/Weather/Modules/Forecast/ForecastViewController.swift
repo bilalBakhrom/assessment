@@ -54,6 +54,13 @@ final class ForecastController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
+        
+        viewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] content in
+                self?.showError(with: content)
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Layout

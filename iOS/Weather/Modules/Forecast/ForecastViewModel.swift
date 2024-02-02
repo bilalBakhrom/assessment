@@ -15,6 +15,7 @@ final class ForecastViewModel: BaseViewModel {
     // MARK: - Properties
     
     @Published var isFetchingForecast: Bool = false
+    @Published var content: ForecastContent?
     
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
@@ -47,7 +48,11 @@ extension ForecastViewModel {
     func sendEvent(_ event: ViewEvent) async {
         switch event {
         case .fetchForecastData(let location):
-            await fetchForecastData(lat: location.lat, lon: location.lon)
+            if let city = applicationSettings.userSelectedCity {
+                await fetchForecastData(lat: city.lat, lon: city.lon)
+            } else {
+                await fetchForecastData(lat: location.lat, lon: location.lon)
+            }
         }
     }
 }
@@ -63,7 +68,7 @@ extension ForecastViewModel {
         do {
             let model = RMForecast(lat: lat, lon: lon, daysCount: 10)
             let response = try await weatherRepo.fetchForecast(model: model)
-            print(response)
+            content = ForecastContent(from: response)
         } catch {
             reportError(error)
         }

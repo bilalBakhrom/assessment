@@ -16,10 +16,10 @@ public struct City: Codable, Identifiable {
     public var country: String
     
     public init(
-        name: String?,
-        lat: Double?,
-        lon: Double?,
-        country: String?
+        name: String? = nil,
+        lat: Double? = nil,
+        lon: Double? = nil,
+        country: String? = nil
     ) {
         self.id = UUID().uuidString
         self.name = name ?? ""
@@ -33,6 +33,15 @@ public struct City: Codable, Identifiable {
             name: response?.name,
             lat: response?.lat,
             lon: response?.lon,
+            country: response?.country
+        )
+    }
+    
+    public init(from response: ANForecastContent.City?) {
+        self.init(
+            name: response?.name,
+            lat: response?.coord?.lat,
+            lon: response?.coord?.lon,
             country: response?.country
         )
     }

@@ -57,6 +57,13 @@ final class MainController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
+        
+        viewModel.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] content in
+                self?.showError(with: content)
+            }
+            .store(in: &subscriptions)
     }
     
     override func performInitialRequests() async {

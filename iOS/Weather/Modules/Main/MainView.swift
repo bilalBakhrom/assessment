@@ -67,7 +67,7 @@ struct MainView: View {
                 .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(Color.modulePrimaryLabel)
             }
-            .padding(.top, 60)
+            .padding(.top, 60 + safeAreaInsets.top)
             
             if !viewModel.isFetchingWeatherDetails {
                 Text(viewModel.weatherDetails?.recommendation ?? "")

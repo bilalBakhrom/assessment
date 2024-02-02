@@ -10,7 +10,7 @@ import Foundation
 public final class NetworkSettings {
     public static let shared = NetworkSettings()
  
-    public let appID = "40ac8526be74697237353948e35b0053"
+    public let appID = "b7f4d4c2268ac5cd620a2bc3964d2089"
     
     private init() {}
 }

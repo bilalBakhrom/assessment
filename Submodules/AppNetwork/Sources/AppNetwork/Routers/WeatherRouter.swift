@@ -29,7 +29,7 @@ public enum WeatherRouter: ANBaseRouterProtocol {
             return "/data/2.5/weather"
             
         case .fetchForecast:
-            return "/data/2.5/forecast/daily"
+            return "/data/2.5/forecast"
         }
     }
     
