@@ -50,4 +50,38 @@ public extension ApplicationSettings {
             storage.set(data, forKey: .userSelectedCity)
         }
     }
+    
+    var weatherDetails: WeatherDetails? {
+        get {
+            guard let data = storage.data(forKey: .weatherDetails) else {
+                return nil
+            }
+            
+            return try? JSONDecoder().decode(WeatherDetails.self, from: data)
+        }
+        set {
+            guard let city = newValue,
+                  let data = try? JSONEncoder().encode(city)
+            else { return }
+            
+            storage.set(data, forKey: .weatherDetails)
+        }
+    }
+    
+    var forecastContent: ForecastContent? {
+        get {
+            guard let data = storage.data(forKey: .forecastContent) else {
+                return nil
+            }
+            
+            return try? JSONDecoder().decode(ForecastContent.self, from: data)
+        }
+        set {
+            guard let city = newValue,
+                  let data = try? JSONEncoder().encode(city)
+            else { return }
+            
+            storage.set(data, forKey: .forecastContent)
+        }
+    }
 }

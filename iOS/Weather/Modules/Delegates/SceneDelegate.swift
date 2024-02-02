@@ -7,10 +7,12 @@
 
 import UIKit
 import AppSettings
+import AppNetwork
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var rootCoordinator: RootCoordinator?
+    var networkMonitor = NetworkReachabilityMonitor()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -19,10 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let applicationSettings = ApplicationSettings.shared
         let locationManager = LocationManager()
+        networkMonitor.start()
         
         let dependency = RootCoordinatorDependency(
             applicationSettings: applicationSettings,
-            locationManager: locationManager
+            locationManager: locationManager,
+            networkMonitor: networkMonitor
         )
         
         rootCoordinator = RootCoordinator(

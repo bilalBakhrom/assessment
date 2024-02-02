@@ -24,6 +24,7 @@ final class MainViewModel: BaseViewModel {
     
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
+    let networkMonitor: NetworkReachabilityMonitor
     
     private let coordinator: MainCoordinator
     private let weatherRepo: WeatherRepoProtocol
@@ -37,9 +38,11 @@ final class MainViewModel: BaseViewModel {
         self.coordinator = coordinator
         self.applicationSettings = coordinator.dependency.applicationSettings
         self.locationManager = coordinator.dependency.locationManager
+        self.networkMonitor = coordinator.dependency.networkMonitor
         self.weatherRepo = coordinator.dependency.weatherRepo
         self.geocodingRepo = coordinator.dependency.geocodingRepo
         self.selectedCity = coordinator.dependency.applicationSettings.userSelectedCity
+        self.weatherDetails = coordinator.dependency.applicationSettings.weatherDetails
     }
     
     private func openSettings() {
@@ -140,7 +143,7 @@ extension MainViewModel {
 @MainActor
 extension MainViewModel {
     private func fetchWeatherDetails(lat: Double, lon: Double) async {
-        guard !isFetchingWeatherDetails else { return }
+        guard !isFetchingWeatherDetails && networkMonitor.isReachable else { return }
         
         isFetchingWeatherDetails = true
         
@@ -148,6 +151,7 @@ extension MainViewModel {
             let model = RMLocation(lat: lat, lon: lon)
             let response = try await weatherRepo.fetchWeatherDetails(with: model)
             weatherDetails = WeatherDetails(from: response)
+            applicationSettings.weatherDetails = weatherDetails
         } catch {
             reportError(error)
         }
@@ -156,7 +160,7 @@ extension MainViewModel {
     }
     
     private func fetchCities(with query: String) async {
-        guard !isFetchingCities, !query.isEmpty else { return }
+        guard !isFetchingCities, !query.isEmpty, networkMonitor.isReachable else { return }
         
         isFetchingCities = true
         

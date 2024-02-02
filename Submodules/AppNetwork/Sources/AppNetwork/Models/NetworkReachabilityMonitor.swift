@@ -28,6 +28,8 @@ final public class NetworkReachabilityMonitor {
     /// A weak reference to the delegate that will receive network reachability updates.
     public weak var delegate: NetworkReachabilityMonitorDelegate?
     
+    public var isReachable: Bool = true
+    
     /// A publisher that emits a boolean value indicating whether the network is reachable.
     public var statusPublisher: AnyPublisher<Bool, Never> {
         networkStatusSubject.eraseToAnyPublisher()
@@ -55,6 +57,7 @@ final public class NetworkReachabilityMonitor {
             guard let self = self else { return }
             
             let isReachable = path.status == .satisfied
+            self.isReachable = isReachable
             self.networkStatusSubject.send(isReachable)
             self.delegate?.networkReachabilityMonitorDidUpdateStatus(self, isReachable: isReachable)
         }

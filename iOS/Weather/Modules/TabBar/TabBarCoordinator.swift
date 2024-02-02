@@ -8,17 +8,21 @@
 import Foundation
 import AppBaseController
 import AppSettings
+import AppNetwork
 
 public struct TabBarDependency {
     public let applicationSettings: ApplicationSettings
     public let locationManager: LocationManager
+    public let networkMonitor: NetworkReachabilityMonitor
     
     public init(
         applicationSettings: ApplicationSettings,
-        locationManager: LocationManager
+        locationManager: LocationManager,
+        networkMonitor: NetworkReachabilityMonitor
     ) {
         self.applicationSettings = applicationSettings
         self.locationManager = locationManager
+        self.networkMonitor = networkMonitor
     }
 }
 

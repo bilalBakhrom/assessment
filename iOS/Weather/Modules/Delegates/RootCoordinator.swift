@@ -8,17 +8,21 @@
 import UIKit
 import AppBaseController
 import AppSettings
+import AppNetwork
 
 public struct RootCoordinatorDependency {
     public let applicationSettings: ApplicationSettings
     public let locationManager: LocationManager
+    public let networkMonitor: NetworkReachabilityMonitor
     
     public init(
         applicationSettings: ApplicationSettings,
-        locationManager: LocationManager
+        locationManager: LocationManager,
+        networkMonitor: NetworkReachabilityMonitor
     ) {
         self.applicationSettings = applicationSettings
         self.locationManager = locationManager
+        self.networkMonitor = networkMonitor
     }
 }
 
@@ -46,7 +50,8 @@ public final class RootCoordinator: Coordinator {
         
         let dependency = TabBarDependency(
             applicationSettings: dependency.applicationSettings,
-            locationManager: dependency.locationManager
+            locationManager: dependency.locationManager,
+            networkMonitor: dependency.networkMonitor
         )
         let coordinator = TabBarCoordinator(
             dependency,

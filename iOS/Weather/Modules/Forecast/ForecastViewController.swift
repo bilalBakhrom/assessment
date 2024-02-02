@@ -72,6 +72,19 @@ final class ForecastController: BaseViewController {
                 }
             }
             .store(in: &subscriptions)
+        
+        viewModel.networkMonitor
+            .statusPublisher
+            .sink { [weak self] isReachable in
+                guard let self, isReachable else { return }
+                
+                let location = viewModel.locationManager.location
+                
+                Task {
+                    await self.viewModel.sendEvent(.fetchForecastData(location: location))
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Layout

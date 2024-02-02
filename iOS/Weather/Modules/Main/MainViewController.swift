@@ -64,6 +64,19 @@ final class MainController: BaseViewController {
                 self?.showError(with: content)
             }
             .store(in: &subscriptions)
+        
+        viewModel.networkMonitor
+            .statusPublisher
+            .sink { [weak self] isReachable in
+                guard let self, isReachable else { return }
+                
+                let location = viewModel.locationManager.location
+                
+                Task {
+                    await self.viewModel.sendEvent(.fetchWeatherDetails(location: location))
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     override func performInitialRequests() async {

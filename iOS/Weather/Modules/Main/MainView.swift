@@ -70,7 +70,7 @@ struct MainView: View {
             .padding(.top, 60 + safeAreaInsets.top)
             
             HStack(spacing: 12) {
-                if let url = viewModel.weatherDetails?.iconURL {
+                if let url = viewModel.weatherDetails?.iconURL, viewModel.networkMonitor.isReachable {
                     AsyncImage(url: url) { image in
                         image.resizable()
                     } placeholder: {
@@ -83,7 +83,7 @@ struct MainView: View {
                     Text(viewModel.weatherDetails?.recommendation ?? "")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.modulePrimaryLabel)
-                        .multilineTextAlignment(.center)                        
+                        .multilineTextAlignment(.center)
                 }
             }
             .padding(.vertical, 40)

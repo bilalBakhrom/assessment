@@ -17,7 +17,8 @@ public final class TabBarController: BaseTabBarController {
     private lazy var mainViewController: UIViewController = {
         let dependency = MainDependency(
             applicationSettings: viewModel.applicationSettings,
-            locationManager: viewModel.locationManager
+            locationManager: viewModel.locationManager,
+            networkMonitor: viewModel.networkMonitor
         )
         let navController = BaseNavigationController()
         navController.tabBarItem = .createTabBarItem(for: .main)
@@ -37,7 +38,8 @@ public final class TabBarController: BaseTabBarController {
     private lazy var forecastViewController: UIViewController = {
         let dependency = ForecastDependency(
             applicationSettings: viewModel.applicationSettings,
-            locationManager: viewModel.locationManager
+            locationManager: viewModel.locationManager,
+            networkMonitor: viewModel.networkMonitor
         )
         let navController = BaseNavigationController()
         navController.tabBarItem = .createTabBarItem(for: .forecast)
@@ -57,6 +59,8 @@ public final class TabBarController: BaseTabBarController {
         let view = UIButton(configuration: configuration)
         view.frame = CGRect(origin: .zero, size: CGSize(width: 64, height: 64))
         view.addTarget(self, action: #selector(handleMiddleButtonClick), for: .touchUpInside)
+        view.layer.cornerRadius = 32
+        view.clipsToBounds = true
         
         return view
     }()
@@ -93,6 +97,8 @@ public final class TabBarController: BaseTabBarController {
             x: view.bounds.width / 2 - middleButton.frame.size.width / 2,
             y: view.bounds.height - middleButton.frame.height - view.safeAreaInsets.bottom
         )
+        middleButton.configuration?.background.cornerRadius = middleButton.frame.height / 2
+        middleButton.layer.cornerRadius = middleButton.frame.height / 2
     }
     
     // MARK: - BINDER

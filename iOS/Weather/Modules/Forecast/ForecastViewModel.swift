@@ -19,6 +19,7 @@ final class ForecastViewModel: BaseViewModel {
     
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
+    let networkMonitor: NetworkReachabilityMonitor
     
     private let coordinator: ForecastCoordinator
     private let weatherRepo: WeatherRepoProtocol
@@ -29,7 +30,9 @@ final class ForecastViewModel: BaseViewModel {
         self.coordinator = coordinator
         self.applicationSettings = coordinator.dependency.applicationSettings
         self.locationManager = coordinator.dependency.locationManager
+        self.networkMonitor = coordinator.dependency.networkMonitor
         self.weatherRepo = coordinator.dependency.weatherRepo
+        self.content = coordinator.dependency.applicationSettings.forecastContent
     }
 }
 
@@ -62,13 +65,14 @@ extension ForecastViewModel {
 @MainActor
 extension ForecastViewModel {
     private func fetchForecastData(lat: Double, lon: Double) async {
-        guard !isFetchingForecast else { return }
+        guard !isFetchingForecast && networkMonitor.isReachable else { return }
         isFetchingForecast = true
         
         do {
             let model = RMForecast(lat: lat, lon: lon)
             let response = try await weatherRepo.fetchForecast(model: model)
             content = ForecastContent(from: response)
+            applicationSettings.forecastContent = content
         } catch {
             reportError(error)
         }

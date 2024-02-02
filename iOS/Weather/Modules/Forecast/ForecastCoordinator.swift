@@ -13,15 +13,18 @@ import AppNetwork
 public struct ForecastDependency {
     public let applicationSettings: ApplicationSettings
     public let locationManager: LocationManager
+    public let networkMonitor: NetworkReachabilityMonitor
     public let weatherRepo: WeatherRepoProtocol
     
     public init(
         applicationSettings: ApplicationSettings, 
         locationManager: LocationManager,
+        networkMonitor: NetworkReachabilityMonitor,
         weatherRepo: WeatherRepoProtocol = WeatherRepo()
     ) {
         self.applicationSettings = applicationSettings
         self.locationManager = locationManager
+        self.networkMonitor = networkMonitor
         self.weatherRepo = weatherRepo
     }
 }
