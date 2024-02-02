@@ -41,6 +41,7 @@
 		D5596B7D2B6BFB9D00A2887C /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */; };
 		D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */; };
 		D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B802B6BFD8100A2887C /* RootCoordinator.swift */; };
+		D5596B862B6C7F9A00A2887C /* MainLocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCoordinator.swift; sourceTree = "<group>"; };
 		D5596B802B6BFD8100A2887C /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			children = (
 				D5596B702B6BFB7B00A2887C /* MainViewController.swift */,
 				D5596B722B6BFB7F00A2887C /* MainView.swift */,
+				D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */,
 				D5596B742B6BFB8400A2887C /* MainViewModel.swift */,
 				D5596B762B6BFB8900A2887C /* MainCoordinator.swift */,
 			);
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5596B6B2B6BFA8000A2887C /* TabBarViewModel.swift in Sources */,
+				D5596B862B6C7F9A00A2887C /* MainLocationPickerView.swift in Sources */,
 				D5596B732B6BFB7F00A2887C /* MainView.swift in Sources */,
 				D5596B7B2B6BFB9900A2887C /* ForecastView.swift in Sources */,
 				D5596B692B6BFA7A00A2887C /* TabBarController.swift in Sources */,

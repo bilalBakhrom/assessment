@@ -8,7 +8,8 @@
 import Foundation
 import AppNetwork
 
-public struct City: Codable {
+public struct City: Codable, Identifiable {
+    public var id: String
     public var name: String
     public var lat: Double
     public var lon: Double
@@ -20,6 +21,7 @@ public struct City: Codable {
         lon: Double?,
         country: String?
     ) {
+        self.id = UUID().uuidString
         self.name = name ?? ""
         self.lat = lat ?? 0
         self.lon = lon ?? 0
@@ -36,3 +38,4 @@ public struct City: Codable {
     }
 }
 
+extension City: Hashable {}

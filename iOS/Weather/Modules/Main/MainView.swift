@@ -77,22 +77,38 @@ struct MainView: View {
                     .padding(.vertical, 40)
             }
             
-            Button {
-                Task { await viewModel.sendEvent(.onTapChange)}
-            } label: {
-                Text("Change Location")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.modulePrimaryLabel)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+            VStack(spacing: 8) {
+                Button {
+                    Task { await viewModel.sendEvent(.onTapChange)}
+                } label: {
+                    Text("Change Location")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color.modulePrimaryLabel)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                }
+                .background(Color.moduleAccent)
+                .clipShape(.rect(cornerRadius: 12))
+                .opacity(0.8)
+                
+                if viewModel.hasSelectedCity {
+                    Button {
+                        Task { await viewModel.sendEvent(.removeSelectedCity) }
+                    } label: {
+                        Text("Remove")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(Color.moduleMainRed)
+                    }
+                }
             }
-            .background(Color.moduleAccent)
-            .clipShape(.rect(cornerRadius: 12))
-            .opacity(0.8)
             
             Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(Color.modulePrimaryBackground)
+        .sheet(isPresented: $viewModel.isLocationPickerPresented) {
+            MainLocationPickerView(viewModel: viewModel)
+                .background(Color.modulePrimaryBackground)
+        }
     }
 }

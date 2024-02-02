@@ -14,11 +14,12 @@ import AppModels
 final class MainViewModel: BaseViewModel {
     @Published var query: String = ""
     @Published var weatherDetails: WeatherDetails?
-    @Published var showLocationDisabledAlert: Bool = false
+    @Published var isSearchBarActive: Bool = false
     @Published var isFetchingWeatherDetails: Bool = false
     @Published var isFetchingCities: Bool = false
+    @Published var isLocationPickerPresented: Bool = false
     @Published var cities: [City] = []
-    @Published var city: City?
+    @Published var selectedCity: City?
 
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
@@ -29,7 +30,7 @@ final class MainViewModel: BaseViewModel {
     private let appID = "40ac8526be74697237353948e35b0053"
     
     var hasSelectedCity: Bool {
-        city != nil
+        selectedCity != nil
     }
     
     init(coordinator: MainCoordinator) {
@@ -38,7 +39,7 @@ final class MainViewModel: BaseViewModel {
         self.locationManager = coordinator.dependency.locationManager
         self.weatherRepo = coordinator.dependency.weatherRepo
         self.geocodingRepo = coordinator.dependency.geocodingRepo
-        self.city = coordinator.dependency.applicationSettings.userSelectedCity
+        self.selectedCity = coordinator.dependency.applicationSettings.userSelectedCity
     }
     
     private func openSettings() {
@@ -54,11 +55,13 @@ final class MainViewModel: BaseViewModel {
 
 extension MainViewModel {
     enum ViewEvent {
-        case fetchCities
+        case fetchCities(query: String)
         case fetchWeatherDetails(location: AppCoordinates)
         case openSettings
         case onTapChange
+        case onTapCity(city: City)
         case requestLocationAuthorization
+        case removeSelectedCity
         case startUpdatingLocation
     }
 }
@@ -69,20 +72,38 @@ extension MainViewModel {
 extension MainViewModel {
     func sendEvent(_ event: ViewEvent) async {
         switch event {
-        case .fetchCities:
+        case .fetchCities(let query):
             await fetchCities(with: query)
             
         case .fetchWeatherDetails(let location):
-            await fetchWeatherDetails(with: location)
+            if let city = selectedCity {
+                await fetchWeatherDetails(lat: city.lat, lon: city.lon)
+            } else {
+                await fetchWeatherDetails(lat: location.lat, lon: location.lon)
+            }
             
         case .openSettings:
             openSettings()
             
         case .onTapChange:
-            break
+            isLocationPickerPresented = true
+            
+        case .onTapCity(let city):
+            selectedCity = city
+            applicationSettings.userSelectedCity = city
+            isLocationPickerPresented = false
+            cities = []
+            query = ""
+            await fetchWeatherDetails(lat: city.lat, lon: city.lon)
             
         case .requestLocationAuthorization:
             locationManager.requestLocationAuthorization()
+            
+        case .removeSelectedCity:
+            selectedCity = nil
+            applicationSettings.userSelectedCity = nil
+            let location = locationManager.location
+            await fetchWeatherDetails(lat: location.lat, lon: location.lon)
             
         case .startUpdatingLocation:
             locationManager.startUpdatingLocation()
@@ -94,20 +115,13 @@ extension MainViewModel {
 
 @MainActor
 extension MainViewModel {
-    private func fetchWeatherDetails(with location: AppCoordinates) async {
+    private func fetchWeatherDetails(lat: Double, lon: Double) async {
         guard !isFetchingWeatherDetails else { return }
         
         isFetchingWeatherDetails = true
         
         do {
-            let model: RMLocation
-            
-            if let city {
-                model = RMLocation(lat: city.lat, lon: city.lon, appID: appID)
-            } else {
-                model = RMLocation(lat: location.lat, lon: location.lon, appID: appID)
-            }
-            
+            let model = RMLocation(lat: lat, lon: lon, appID: appID)
             let response = try await weatherRepo.fetchWeatherDetails(with: model)
             weatherDetails = WeatherDetails(from: response)
         } catch {
