@@ -10,7 +10,7 @@ import Foundation
 public struct RMForecast: Codable {
     public let lat: Double
     public let lon: Double
-    public let appID: String
+    public let appid: String
     public let cnt: Int
     public let units: RMUnits
     
@@ -19,6 +19,6 @@ public struct RMForecast: Codable {
         self.lon = lon
         self.cnt = daysCount
         self.units = units
-        self.appID = appID ?? NetworkSettings.shared.appID
+        self.appid = appID ?? NetworkSettings.shared.appID
     }
 }

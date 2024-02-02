@@ -116,7 +116,7 @@ extension MainViewModel {
 extension MainViewModel {
     private func fetchWeatherDetails(lat: Double, lon: Double) async {
         guard !isFetchingWeatherDetails else { return }
-        
+
         isFetchingWeatherDetails = true
         
         do {

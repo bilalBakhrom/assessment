@@ -28,6 +28,12 @@ public final class TabBarController: BaseTabBarController {
         return navController
     }()
     
+    private lazy var middleViewController: UIViewController = {
+        let viewController = UIViewController()
+        
+        return viewController
+    }()
+    
     private lazy var forecastViewController: UIViewController = {
         let dependency = ForecastDependency(
             applicationSettings: viewModel.applicationSettings,
@@ -42,6 +48,19 @@ public final class TabBarController: BaseTabBarController {
         return navController
     }()
     
+    private lazy var middleButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "plus")
+        configuration.background.cornerRadius = 32
+        configuration.baseBackgroundColor = .moduleAccent
+        
+        let view = UIButton(configuration: configuration)
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 64, height: 64))
+        view.addTarget(self, action: #selector(handleMiddleButtonClick), for: .touchUpInside)
+        
+        return view
+    }()
+    
     // MARK: - Initialization
     
     public init(viewModel: TabBarViewModel) {
@@ -54,13 +73,26 @@ public final class TabBarController: BaseTabBarController {
         super.viewDidLoad()
         
         bind()
-        setViewControllers([mainViewController, forecastViewController], animated: false)
+        setViewControllers([mainViewController, middleViewController, forecastViewController], animated: false)
+        view.addSubview(middleButton)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupMiddleButton()
+    }
+    
+    private func setupMiddleButton() {
+        middleButton.frame.origin = CGPoint(
+            x: view.bounds.width / 2 - middleButton.frame.size.width / 2,
+            y: view.bounds.height - middleButton.frame.height - view.safeAreaInsets.bottom
+        )
     }
     
     // MARK: - BINDER
@@ -77,5 +109,20 @@ public final class TabBarController: BaseTabBarController {
     
     private func handleLocationStatus(_ status: CLAuthorizationStatus) {
         tabBar.isHidden = (status == .denied) || (status == .restricted)
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    private func handleMiddleButtonClick() {
+        let alertController = UIAlertController(
+            title: "Middle Button Alert",
+            message: "In process..",
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(.init(title: "Ok", style: .cancel))
+        
+        present(alertController, animated: true)
     }
 }
