@@ -11,17 +11,6 @@ import AppColors
 public struct AUILocationAccessNeeded: View {
     public var onRequest: @MainActor () async -> Void
     
-    private var linearGradient: LinearGradient {
-        let firstColor: Color = .moduleSecondaryAccent
-        let secondColor: Color = .moduleAccent
-        
-        return LinearGradient(
-            gradient: Gradient(colors: [firstColor, secondColor]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-    }
-    
     public init(onRequest: @escaping @MainActor () async -> Void) {
         self.onRequest = onRequest
     }
@@ -51,6 +40,6 @@ public struct AUILocationAccessNeeded: View {
             .padding(.bottom, 40)
         }
         .padding(.horizontal)
-        .background(linearGradient)
+        .background(LinearGradient.blueSkyGradient)
     }
 }

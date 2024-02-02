@@ -25,6 +25,18 @@ public final class LocationManager: NSObject, ObservableObject {
         locationStatus == .authorizedWhenInUse || locationStatus == .authorizedAlways
     }
     
+    public var country: String? {
+        let locale = Locale.current
+        
+        if #available(iOS 16.0, *) {
+            let countryCode = locale.region?.identifier
+            return locale.localizedString(forRegionCode: countryCode ?? "")
+        } else {
+            let countryCode = locale.regionCode
+            return locale.localizedString(forRegionCode: countryCode ?? "")
+        }                
+    }
+    
     public override init() {
         let locationManager = CLLocationManager()
         self.locationManager = locationManager

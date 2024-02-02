@@ -13,7 +13,7 @@ public struct WeatherDetails: Codable {
     public var id: Int
     public var coord: AppCoordinates
     public var weather: [Weather]?
-    public var main: MainDetails?
+    public var main: MainDetails
     public var timezone: Int?
     public var name: String?
     
@@ -21,16 +21,19 @@ public struct WeatherDetails: Codable {
         weather?.first?.description.description ?? ""
     }
     
-    public var temp: Int {
-        Int(main?.temp ?? 0)
+    public var vwTemp: String {
+        let value = Int(main.temp)
+        return value == .notAvailable ? "-" : "\(value)°"
+    }
+     
+    public var vwTempMax: String {
+        let value = Int(main.tempMax)
+        return value == .notAvailable ? "-" : "\(value)°"
     }
     
-    public var tempMax: Int {
-        Int(main?.tempMax ?? 0)
-    }
-    
-    public var tempMin: Int {
-        Int(main?.tempMin ?? 0)
+    public var vwTempMin: String {
+        let value = Int(main.tempMin)
+        return value == .notAvailable ? "-" : "\(value)°"
     }
     
     public var iconURL: URL? {
@@ -39,7 +42,7 @@ public struct WeatherDetails: Codable {
     }
     
     public var recommendation: String {
-        switch temp {
+        switch main.temp {
         case ..<0:
             return "Bundle up, it's freezing outside!"
         case 0...15:
@@ -62,7 +65,7 @@ public struct WeatherDetails: Codable {
         self.id = id ?? 0
         self.coord = coord
         self.weather = weather
-        self.main = main
+        self.main = main ?? MainDetails()
         self.timezone = timezone
         self.name = name
     }

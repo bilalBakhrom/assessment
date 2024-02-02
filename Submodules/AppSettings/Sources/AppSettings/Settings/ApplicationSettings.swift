@@ -45,7 +45,10 @@ public extension ApplicationSettings {
         set {
             guard let city = newValue,
                   let data = try? JSONEncoder().encode(city)
-            else { return }
+            else {
+                storage.set(nil, forKey: .userSelectedCity)
+                return
+            }
             
             storage.set(data, forKey: .userSelectedCity)
         }
@@ -60,9 +63,12 @@ public extension ApplicationSettings {
             return try? JSONDecoder().decode(WeatherDetails.self, from: data)
         }
         set {
-            guard let city = newValue,
-                  let data = try? JSONEncoder().encode(city)
-            else { return }
+            guard let details = newValue,
+                  let data = try? JSONEncoder().encode(details)
+            else {
+                storage.set(nil, forKey: .weatherDetails)
+                return
+            }
             
             storage.set(data, forKey: .weatherDetails)
         }
@@ -77,9 +83,12 @@ public extension ApplicationSettings {
             return try? JSONDecoder().decode(ForecastContent.self, from: data)
         }
         set {
-            guard let city = newValue,
-                  let data = try? JSONEncoder().encode(city)
-            else { return }
+            guard let content = newValue,
+                  let data = try? JSONEncoder().encode(content)
+            else {
+                storage.set(nil, forKey: .forecastContent)
+                return
+            }
             
             storage.set(data, forKey: .forecastContent)
         }

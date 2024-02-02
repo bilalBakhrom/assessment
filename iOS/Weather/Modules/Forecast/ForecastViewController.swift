@@ -67,8 +67,10 @@ final class ForecastController: BaseViewController {
             .sink { [weak self] notification in
                 guard let self else { return }
                 
+                let location = viewModel.locationManager.location
+                
                 Task {
-                    await self.viewModel.sendEvent(.fetchForecastData())
+                    await self.viewModel.sendEvent(.fetchForecastData(location: location))
                 }
             }
             .store(in: &subscriptions)

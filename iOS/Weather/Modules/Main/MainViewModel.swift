@@ -14,7 +14,7 @@ import AppModels
 
 final class MainViewModel: BaseViewModel {
     @Published var query: String = ""
-    @Published var weatherDetails: WeatherDetails?
+    @Published var details: WeatherDetails?
     @Published var isSearchBarActive: Bool = false
     @Published var isFetchingWeatherDetails: Bool = false
     @Published var isFetchingCities: Bool = false
@@ -42,7 +42,6 @@ final class MainViewModel: BaseViewModel {
         self.weatherRepo = coordinator.dependency.weatherRepo
         self.geocodingRepo = coordinator.dependency.geocodingRepo
         self.selectedCity = coordinator.dependency.applicationSettings.userSelectedCity
-        self.weatherDetails = coordinator.dependency.applicationSettings.weatherDetails
     }
     
     private func openSettings() {
@@ -133,6 +132,8 @@ extension MainViewModel {
         // Removes the currently selected city and fetches weather details for the current location.
         selectedCity = nil
         applicationSettings.userSelectedCity = nil
+        NotificationCenter.default.post(appNotif: .didSelectCity, object: nil)
+        
         let location = locationManager.location
         await fetchWeatherDetails(lat: location.lat, lon: location.lon)
     }
@@ -143,15 +144,20 @@ extension MainViewModel {
 @MainActor
 extension MainViewModel {
     private func fetchWeatherDetails(lat: Double, lon: Double) async {
-        guard !isFetchingWeatherDetails && networkMonitor.isReachable else { return }
+        guard !isFetchingWeatherDetails else { return }
+        
+        if !networkMonitor.isReachable {
+            details = applicationSettings.weatherDetails
+            return
+        }
         
         isFetchingWeatherDetails = true
         
         do {
             let model = RMLocation(lat: lat, lon: lon)
             let response = try await weatherRepo.fetchWeatherDetails(with: model)
-            weatherDetails = WeatherDetails(from: response)
-            applicationSettings.weatherDetails = weatherDetails
+            details = WeatherDetails(from: response)
+            applicationSettings.weatherDetails = details
         } catch {
             reportError(error)
         }

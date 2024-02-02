@@ -23,14 +23,14 @@ public struct MainDetails: Codable {
         seaLevel: Int? = nil,
         grndLevel: Int? = nil
     ) {
-        self.temp = temp ?? 0
-        self.feelsLike = feelsLike ?? 0
-        self.tempMin = tempMin ?? 0
-        self.tempMax = tempMax ?? 0
-        self.pressure = pressure ?? 0
-        self.humidity = humidity ?? 0
-        self.seaLevel = seaLevel ?? 0
-        self.grndLevel = grndLevel ?? 0
+        self.temp = temp ?? .notAvailable
+        self.feelsLike = feelsLike ?? .notAvailable
+        self.tempMin = tempMin ?? .notAvailable
+        self.tempMax = tempMax ?? .notAvailable
+        self.pressure = pressure ?? .notAvailable
+        self.humidity = humidity ?? .notAvailable
+        self.seaLevel = seaLevel ?? .notAvailable
+        self.grndLevel = grndLevel ?? .notAvailable
     }
     
     public init(from response: ANMain?) {
