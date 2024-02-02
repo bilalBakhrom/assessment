@@ -12,58 +12,53 @@ public struct Forecast: Codable, Identifiable {
     public let id: String
     public let timestamp: Int
     public let weather: [Weather]
-    public let temperature: Temperature
+    public let main: MainDetails
     
     public var description: String {
         weather.first?.description.description ?? ""
     }
     
     public var temp: Int {
-        Int(temperature.day)
+        Int(main.temp)
     }
     
     public var tempMax: Int {
-        Int(temperature.max)
+        Int(main.tempMax)
     }
     
     public var tempMin: Int {
-        Int(temperature.min)
+        Int(main.tempMin)
     }
     
     public var formattedDate: String {
         // Create a Date instance from the timestamp
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
         
-        // Check if the date is today
-        if Calendar.current.isDateInToday(date) {
-            return "Today"
-        } else {
-            // Initialize a DateFormatter for the weekday
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEE"
-            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            
-            // Convert the Date to a String with the weekday name
-            return dateFormatter.string(from: date)
-        }
+        // Initialize a DateFormatter for the weekday
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE +HH"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // Convert the Date to a String with the weekday name
+        return dateFormatter.string(from: date)
     }
     
     public init(
         timestamp: Int?,
         weather: [Weather]?,
-        temperature: Temperature?
+        main: MainDetails?
     ) {
         self.id = UUID().uuidString
         self.timestamp = timestamp ?? 0
         self.weather = weather ?? []
-        self.temperature = temperature ?? Temperature()
+        self.main = main ?? MainDetails()
     }
     
     public init(from response: ANForecast) {
         self.init(
             timestamp: response.dt,
             weather: response.weather?.map({ Weather(from: $0) }),
-            temperature: Temperature(from: response.temp)
+            main: MainDetails(from: response.main)
         )
     }
 }

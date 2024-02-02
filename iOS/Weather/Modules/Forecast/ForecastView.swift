@@ -48,7 +48,7 @@ struct ForecastView: View {
                             .id(forecast.id)
                         }
                     } header: {
-                        Text("\(content.numberOfDays)-day forecast".uppercased())
+                        Text("5-day forecast".uppercased())
                             .font(.system(size: 12))
                             .foregroundStyle(Color.modulePrimaryLabel)
                     }

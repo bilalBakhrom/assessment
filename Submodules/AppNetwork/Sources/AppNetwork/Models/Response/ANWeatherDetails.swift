@@ -25,17 +25,6 @@ public struct ANWeatherDetails: Codable {
     public var cod: Int?
 }
 
-// MARK: - Main
-public struct ANMain: Codable {
-    public var temp, feelsLike, tempMin, tempMax: Double?
-    public var pressure, humidity: Int?
-    public var seaLevel, grndLevel: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case temp, feelsLike = "feels_like", tempMin = "temp_min", tempMax = "temp_max", pressure, humidity, seaLevel = "sea_level", grndLevel = "grnd_level"
-    }
-}
-
 // MARK: - Wind
 public struct ANWind: Codable {
     public var speed: Double?

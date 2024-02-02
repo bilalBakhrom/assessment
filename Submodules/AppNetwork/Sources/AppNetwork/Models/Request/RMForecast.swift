@@ -11,10 +11,10 @@ public struct RMForecast: Codable {
     public let lat: Double
     public let lon: Double
     public let appid: String
-    public let cnt: Int
+    public let cnt: Int?
     public let units: RMUnits
     
-    public init(lat: Double, lon: Double, daysCount: Int, units: RMUnits = .metric, appID: String? = nil) {
+    public init(lat: Double, lon: Double, daysCount: Int? = nil, units: RMUnits = .metric, appID: String? = nil) {
         self.lat = lat
         self.lon = lon
         self.cnt = daysCount

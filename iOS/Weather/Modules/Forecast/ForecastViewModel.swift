@@ -66,7 +66,7 @@ extension ForecastViewModel {
         isFetchingForecast = true
         
         do {
-            let model = RMForecast(lat: lat, lon: lon, daysCount: 10)
+            let model = RMForecast(lat: lat, lon: lon)
             let response = try await weatherRepo.fetchForecast(model: model)
             content = ForecastContent(from: response)
         } catch {

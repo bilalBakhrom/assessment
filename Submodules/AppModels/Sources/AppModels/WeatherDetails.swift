@@ -13,7 +13,7 @@ public struct WeatherDetails: Codable {
     public var id: Int
     public var coord: AppCoordinates
     public var weather: [Weather]?
-    public var main: Main?
+    public var main: MainDetails?
     public var timezone: Int?
     public var name: String?
     
@@ -50,7 +50,7 @@ public struct WeatherDetails: Codable {
         id: Int?,
         coord: AppCoordinates,
         weather: [Weather]?,
-        main: Main?,
+        main: MainDetails?,
         timezone: Int?,
         name: String?
     ) {
@@ -72,7 +72,7 @@ extension WeatherDetails {
                 lon: response?.coord?.lon ?? 0
             ),
             weather: response?.weather?.map({ Weather(from: $0) }),
-            main: Main(from: response?.main),
+            main: MainDetails(from: response?.main),
             timezone: response?.timezone,
             name: response?.name
         )
@@ -104,46 +104,6 @@ public struct Weather: Codable {
             main: response?.main,
             description: WeatherDescription(rawValue: response?.description ?? ""),
             icon: response?.icon
-        )
-    }
-}
-
-// MARK: - Main
-public struct Main: Codable {
-    public var temp, feelsLike, tempMin, tempMax: Double?
-    public var pressure, humidity: Int?
-    public var seaLevel, grndLevel: Int?
-    
-    public init(
-        temp: Double?,
-        feelsLike: Double?,
-        tempMin: Double?,
-        tempMax: Double?,
-        pressure: Int?,
-        humidity: Int?,
-        seaLevel: Int?,
-        grndLevel: Int?
-    ) {
-        self.temp = temp
-        self.feelsLike = feelsLike
-        self.tempMin = tempMin
-        self.tempMax = tempMax
-        self.pressure = pressure
-        self.humidity = humidity
-        self.seaLevel = seaLevel
-        self.grndLevel = grndLevel
-    }
-    
-    public init(from response: ANMain?) {
-        self.init(
-            temp: response?.temp,
-            feelsLike: response?.feelsLike,
-            tempMin: response?.tempMin,
-            tempMax: response?.tempMax,
-            pressure: response?.pressure,
-            humidity: response?.humidity,
-            seaLevel: response?.seaLevel,
-            grndLevel: response?.grndLevel
         )
     }
 }
