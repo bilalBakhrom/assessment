@@ -51,14 +51,21 @@ public struct AUIWind: View {
             .font(.system(size: 10))
             .foregroundStyle(Color.modulePrimaryLabel.opacity(0.5))
             
-            windSpeedView
-            
-            Rectangle()
-                .fill(Color.modulePrimaryLabel.opacity(0.5))
-                .frame(height: 0.5)
-                .frame(maxWidth: .infinity)
-            
-            windGustView
+            HStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
+                    windSpeedView
+                    
+                    Rectangle()
+                        .fill(Color.modulePrimaryLabel.opacity(0.5))
+                        .frame(height: 0.5)
+                        .frame(maxWidth: .infinity)
+                    
+                    windGustView
+                }
+                
+                AUICompass(currentValue: degree)
+                    .frame(width: 100, height: 100)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
