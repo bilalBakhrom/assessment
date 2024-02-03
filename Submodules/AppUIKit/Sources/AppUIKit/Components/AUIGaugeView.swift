@@ -8,24 +8,6 @@
 import SwiftUI
 import AppColors
 
-struct Needle: Shape {
-    func path(in rect: CGRect) -> Path {
-        let width = rect.width
-        
-        var path = Path()
-        path.move(to: CGPoint(x: 0, y: rect.height / 2))
-        path.addLine(to: CGPoint(x: width, y: 0))
-        path.addLine(to: CGPoint(x: width, y: rect.height))
-        
-        let circleRadius = width / 5
-        let origin = CGPoint(x: width - circleRadius / 2, y: (rect.height / 2) - (circleRadius / 2))
-        let size = CGSize(width: circleRadius, height: circleRadius)
-        path.addEllipse(in: CGRect(origin: origin, size: size))
-        
-        return path
-    }
-}
-
 public struct GaugeView: View {
     public var valueLabel: String?
     public var unitLabel: String?
@@ -87,16 +69,15 @@ public struct GaugeView: View {
                     VStack(spacing: .zero) {
                         if let valueLabel {
                             Text(valueLabel)
-                                .font(.system(size: geometry.size.width * 0.15))
-                                .foregroundStyle(Color.modulePrimaryLabel)
+                                .font(.system(size: geometry.size.width * 0.15, weight: .medium))
                         }
                         
                         if let unitLabel {
                             Text(unitLabel)
-                                .font(.system(size: geometry.size.width * 0.08))
-                                .foregroundStyle(Color.modulePrimaryLabel)
+                                .font(.system(size: geometry.size.width * 0.08, weight: .medium))
                         }
                     }
+                    .foregroundStyle(Color.modulePrimaryLabel)
                 }
                 .offset(y: needleWidth / 3)
                 
@@ -118,7 +99,7 @@ public struct GaugeView: View {
                         
                         Spacer(minLength: .zero)
                     }
-                    .font(.system(size: geometry.size.width * 0.1))
+                    .font(.system(size: geometry.size.width * 0.1, weight: .medium))
                     .foregroundStyle(Color.modulePrimaryLabel)
                 }
             }
@@ -157,24 +138,24 @@ public struct GaugeView: View {
 #Preview {
     VStack(spacing: 40) {
         GaugeView(
-            valueLabel: "1024",
+            valueLabel: "980",
             minLabel: "Low",
             maxLabel: "High",
-            currentValue: 1084 - 1015,
-            maximumValue: 130,
-            step: 10,
+            currentValue: 980 - 860,
+            maximumValue: 226,
+            step: 15,
             sweepAngle: 245
         )
         .frame(width: 100, height: 100)
         
         GaugeView(
-            valueLabel: "1024",
+            valueLabel: "980",
             unitLabel: "hPa",
             minLabel: "Low",
             maxLabel: "High",
-            currentValue: 1084 - 1015,
-            maximumValue: 130,
-            step: 10,
+            currentValue: 980 - 860,
+            maximumValue: 226,
+            step: 15,
             sweepAngle: 245
         )
         .frame(width: 300, height: 300)

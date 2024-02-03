@@ -28,7 +28,7 @@ public struct ANWeatherDetails: Codable {
 // MARK: - Wind
 public struct ANWind: Codable {
     public var speed: Double?
-    public var deg: Int?
+    public var deg: Double?
     public var gust: Double?
 }
 

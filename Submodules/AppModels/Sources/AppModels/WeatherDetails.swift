@@ -13,10 +13,11 @@ public struct WeatherDetails: Codable {
     public var id: Int
     public var coord: AppCoordinates
     public var weather: [Weather]?
-    public var main: MainDetails
     public var timezone: Int?
     public var name: String?
     public var visibility: Int
+    public var main: MainAnalytics
+    public var wind: WindAnalytics
     
     public var description: String {
         weather?.first?.description.description ?? ""
@@ -150,18 +151,20 @@ public struct WeatherDetails: Codable {
         id: Int?,
         coord: AppCoordinates,
         weather: [Weather]?,
-        main: MainDetails?,
+        main: MainAnalytics?,
         timezone: Int?,
         name: String?,
-        visibility: Int?
+        visibility: Int?,
+        wind: WindAnalytics?
     ) {
         self.id = id ?? 0
         self.coord = coord
         self.weather = weather
-        self.main = main ?? MainDetails()
+        self.main = main ?? MainAnalytics()
         self.timezone = timezone
         self.name = name
         self.visibility = visibility ?? .notAvailable
+        self.wind = wind ?? WindAnalytics()
     }
 
     public init(from response: ANWeatherDetails?) {
@@ -172,10 +175,11 @@ public struct WeatherDetails: Codable {
                 lon: response?.coord?.lon ?? 0
             ),
             weather: response?.weather?.map({ Weather(from: $0) }),
-            main: MainDetails(from: response?.main),
+            main: MainAnalytics(from: response?.main),
             timezone: response?.timezone,
             name: response?.name,
-            visibility: response?.visibility
+            visibility: response?.visibility,
+            wind: WindAnalytics(from: response?.wind)
         )
     }
 }

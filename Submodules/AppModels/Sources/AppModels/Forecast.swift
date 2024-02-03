@@ -12,7 +12,7 @@ public struct Forecast: Codable, Identifiable {
     public let id: String
     public let timestamp: Int
     public let weather: [Weather]
-    public let main: MainDetails
+    public let main: MainAnalytics
     
     public var description: String {
         weather.first?.description.description ?? ""
@@ -46,19 +46,19 @@ public struct Forecast: Codable, Identifiable {
     public init(
         timestamp: Int?,
         weather: [Weather]?,
-        main: MainDetails?
+        main: MainAnalytics?
     ) {
         self.id = UUID().uuidString
         self.timestamp = timestamp ?? 0
         self.weather = weather ?? []
-        self.main = main ?? MainDetails()
+        self.main = main ?? MainAnalytics()
     }
     
     public init(from response: ANForecast) {
         self.init(
             timestamp: response.dt,
             weather: response.weather?.map({ Weather(from: $0) }),
-            main: MainDetails(from: response.main)
+            main: MainAnalytics(from: response.main)
         )
     }
 }

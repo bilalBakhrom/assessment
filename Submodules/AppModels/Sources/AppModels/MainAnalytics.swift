@@ -8,7 +8,7 @@
 import Foundation
 import AppNetwork
 
-public struct MainDetails: Codable {
+public struct MainAnalytics: Codable {
     public var temp, feelsLike, tempMin, tempMax: Double
     public var pressure, humidity: Int
     public var seaLevel, grndLevel: Int

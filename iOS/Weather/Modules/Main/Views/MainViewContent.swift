@@ -71,6 +71,13 @@ struct MainViewContent: View {
                 VStack(spacing: 20) {
                     contentRecommendationView
                     
+                    AUIWind(
+                        speed: details.wind.speed,
+                        gust: details.wind.gust,
+                        degree: details.wind.degree
+                    )
+                    .frame(height: widgetWidth)
+                    
                     LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
                         AUIFeelsLike(
                             value: details.vwFeelsLike,

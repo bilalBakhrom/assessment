@@ -12,9 +12,9 @@ import AppAssets
 public struct AUIPressure: View {
     public var value: Int
     
-    private let maxPressure: Int = 1084
-    private let maxiumValue: Int = 130
-    private let stepValue: Int = 10
+    private let minPressure: Int = 900
+    private let maxiumValue: Int = 186
+    private let stepValue: Int = 15
     
     public init(value: Int) {
         self.value = value
@@ -38,7 +38,7 @@ public struct AUIPressure: View {
                 unitLabel: "hPa",
                 minLabel: "Low",
                 maxLabel: "High",
-                currentValue: Double(maxPressure - value),
+                currentValue: Double(value - minPressure),
                 maximumValue: maxiumValue,
                 step: stepValue,
                 sweepAngle: 245
