@@ -44,6 +44,6 @@ struct MainViewPlaceholder: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(LinearGradient.blueSkyGradient)
+        .background(LinearGradient.daylightGradient)
     }
 }

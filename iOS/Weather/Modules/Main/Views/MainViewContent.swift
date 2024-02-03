@@ -140,7 +140,7 @@ struct MainViewContent: View {
             }
             .padding(.top, safeAreaInsets.top)
         }
-        .background(LinearGradient.blueSkyGradient)
+        .background(details.isDaylight ? LinearGradient.daylightGradient : .nightGradient)
     }
     
     private var contentHeaderView: some View {

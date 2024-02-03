@@ -40,6 +40,6 @@ public struct AUILocationAccessNeeded: View {
             .padding(.bottom, 40)
         }
         .padding(.horizontal)
-        .background(LinearGradient.blueSkyGradient)
+        .background(LinearGradient.daylightGradient)
     }
 }
