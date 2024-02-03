@@ -20,6 +20,15 @@ struct MainViewContent: View {
     
     @EnvironmentObject private var locationManager: LocationManager
     @Environment(\.safeAreaInsets) private var safeAreaInsets
+    @Environment(\.windowSize) private var windowSize
+    
+    private var gridItemWidth: CGFloat {
+        return (windowSize.width - 56) / 2
+    }
+    
+    private var columns: [GridItem] {
+        [GridItem(.flexible()), GridItem(.flexible())]
+    }
     
     // MARK: - Initialization
     
@@ -31,57 +40,67 @@ struct MainViewContent: View {
     // MARK: - Views
     
     var body: some View {
-        VStack(spacing: .zero) {
-            contentHeaderView
-                .padding(.top, 60 + safeAreaInsets.top)
-            
-            HStack(spacing: 12) {
-                if let url = details.iconURL, viewModel.networkMonitor.isReachable {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 40, height: 40)
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 20) {
+                contentHeaderView
+                
+                contentRecommendationView
+                
+                LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
+                    AUIFeelsLike(
+                        value: details.vwFeelsLike,
+                        recommendation: details.feelsLikeRecommendation
+                    )
+                    .frame(width: gridItemWidth, height: gridItemWidth)
+                    
+                    AUIVisibility(
+                        value: details.vwVisibility,
+                        recommendation: details.visibilityRecommendation
+                    )
+                    .frame(width: gridItemWidth, height: gridItemWidth)
+                    
+                    AUIHumidity(
+                        value: details.vwHumidity,
+                        recommendation: details.humidityRecommendation
+                    )
+                    .frame(width: gridItemWidth, height: gridItemWidth)
+                    
+                    AUIPressure(
+                        value: details.vwPressure,
+                        recommendation: ""
+                    )
+                    .frame(width: gridItemWidth, height: gridItemWidth)
                 }
                 
-                if !viewModel.isFetchingWeatherDetails {
-                    Text(details.recommendation)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(Color.modulePrimaryLabel)
-                        .multilineTextAlignment(.center)
-                }
-            }
-            .padding(.vertical, 40)
-            
-            VStack(spacing: 8) {
-                Button {
-                    Task { await viewModel.sendEvent(.onTapChange)}
-                } label: {
-                    Text("Change Location")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(Color.modulePrimaryLabel)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                }
-                .background(Color.moduleAccent)
-                .clipShape(.rect(cornerRadius: 12))
-                .opacity(0.8)
-                
-                if viewModel.hasSelectedCity {
+                VStack(spacing: 8) {
                     Button {
-                        Task { await viewModel.sendEvent(.removeSelectedCity) }
+                        Task { await viewModel.sendEvent(.onTapChange)}
                     } label: {
-                        Text("Remove")
+                        Text("Change Location")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(Color.moduleMainRed)
+                            .foregroundStyle(Color.modulePrimaryLabel)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                    }
+                    .background(Color.moduleAccent)
+                    .clipShape(.rect(cornerRadius: 12))
+                    .opacity(0.8)
+                    
+                    if viewModel.hasSelectedCity {
+                        Button {
+                            Task { await viewModel.sendEvent(.removeSelectedCity) }
+                        } label: {
+                            Text("Remove")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(Color.moduleMainRed)
+                        }
                     }
                 }
             }
-            
-            Spacer()
+            .padding(.top, 60 + safeAreaInsets.top)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 100 + safeAreaInsets.bottom)
         }
-        .frame(maxWidth: .infinity)
         .background(LinearGradient.blueSkyGradient)
     }
     
@@ -109,5 +128,32 @@ struct MainViewContent: View {
             .font(.system(size: 14, weight: .medium))
             .foregroundStyle(Color.modulePrimaryLabel)
         }
+    }
+    
+    private var contentRecommendationView: some View {
+        HStack(spacing: 12) {
+            if let url = details.iconURL, viewModel.networkMonitor.isReachable {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 40, height: 40)
+            }
+            
+            if !viewModel.isFetchingWeatherDetails {
+                Text(details.temperatureRecommendation)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Color.modulePrimaryLabel)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            
+            Spacer(minLength: .zero)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity)
+        .background(Color.moduleTertiaryBackground.opacity(0.5))
+        .clipShape(.rect(cornerRadius: 12))
     }
 }

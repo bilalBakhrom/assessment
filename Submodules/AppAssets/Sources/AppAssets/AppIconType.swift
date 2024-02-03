@@ -9,6 +9,7 @@ import Foundation
 
 public enum AppIconType: Int, CaseIterable {
     case logo
+    case gauge
     case tabMain
     case tabForecast
     case tabMainFilled
@@ -20,6 +21,8 @@ extension AppIconType {
         switch self {
         case .logo:
             return "icon.logo"
+        case .gauge:
+            return "icon.gauge"
         case .tabMain:
             return "icon.tabbar.main"
         case .tabMainFilled:

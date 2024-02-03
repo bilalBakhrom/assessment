@@ -15,6 +15,7 @@ final class MainController: BaseViewController {
     
     private lazy var rootView: UIView = {
         let swiftUIView = MainView(viewModel: viewModel)
+            .environment(\.windowSize, view.bounds.size)
             .environmentObject(viewModel.locationManager)
         
         let hostingController = UIHostingController(rootView: swiftUIView)

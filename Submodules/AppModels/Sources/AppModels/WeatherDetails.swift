@@ -16,6 +16,7 @@ public struct WeatherDetails: Codable {
     public var main: MainDetails
     public var timezone: Int?
     public var name: String?
+    public var visibility: Int
     
     public var description: String {
         weather?.first?.description.description ?? ""
@@ -36,12 +37,29 @@ public struct WeatherDetails: Codable {
         return value == .notAvailable ? "-" : "\(value)°"
     }
     
-    public var iconURL: URL? {
-        guard let icon = weather?.first?.icon else { return nil }            
-        return URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png")
+    public var vwFeelsLike: String {
+        let value = Int(main.feelsLike)
+        return value == .notAvailable ? "-" : "\(value)°"
     }
     
-    public var recommendation: String {
+    public var vwVisibility: String {
+        let value = visibility
+        return value == .notAvailable ? "-" : "\(value / 1000) km"
+    }
+    
+    public var vwHumidity: String {
+        let value = main.humidity
+        return value == .notAvailable ? "-" : "\(value)%"
+    }
+    
+    public var vwPressure: String {
+        let value = main.pressure
+        return value == .notAvailable ? "-" : "\(value) hPa"
+    }
+    
+    // MARK: - Recommendations
+    
+    public var temperatureRecommendation: String {
         switch main.temp {
         case ..<0:
             return "Bundle up, it's freezing outside!"
@@ -54,13 +72,88 @@ public struct WeatherDetails: Codable {
         }
     }
     
+    public var feelsLikeRecommendation: String {
+        guard main.feelsLike != .notAvailable else {
+            return ""
+        }
+        
+        let feelsLikeTemperature = Int(main.feelsLike)
+        var message: String = ""
+        
+        if feelsLikeTemperature < 0 {
+            message = " Dress warmly in layers."
+        } else if feelsLikeTemperature < 10 {
+            message = "Wear a coat and consider a hat and gloves."
+        } else if feelsLikeTemperature < 20 {
+            message = "A light jacket or sweater is recommended."
+        } else if feelsLikeTemperature < 30 {
+            message = "Ideal for outdoor activities."
+        } else if feelsLikeTemperature < 35 {
+            message = "Stay hydrated and wear sunscreen."
+        } else {
+            message = "Limit outdoor activities and seek shade."
+        }
+        
+        return message
+    }
+    
+    public var visibilityRecommendation: String {
+        guard visibility != .notAvailable else {
+            return ""
+        }
+        
+        var message: String = ""
+        
+        if visibility < 1000 {
+            message = "Be cautious outdoors."
+        } else if visibility < 3000 {
+            message = "Exercise caution."
+        } else if visibility < 5000 {
+            message = "Stay alert."
+        } else if visibility < 8000 {
+            message = "Proceed normally."
+        } else {
+            message = "Enjoy outdoors."
+        }
+        
+        return message
+    }
+    
+    public var humidityRecommendation: String {
+        guard main.humidity != .notAvailable else {
+            return ""
+        }
+        
+        var message: String = ""
+        
+        if main.humidity < 30 {
+            message = "Air is dry. Stay hydrated."
+        } else if main.humidity < 60 {
+            message = "Comfortable humidity."
+        } else if main.humidity < 80 {
+            message = "Feels humid. Stay cool."
+        } else {
+            message = "Very humid. Avoid exertion."
+        }
+        
+        return message
+    }
+    
+    public var iconURL: URL? {
+        guard let icon = weather?.first?.icon else { return nil }            
+        return URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png")
+    }
+    
+    // MARK: - Initialization
+    
     public init(
         id: Int?,
         coord: AppCoordinates,
         weather: [Weather]?,
         main: MainDetails?,
         timezone: Int?,
-        name: String?
+        name: String?,
+        visibility: Int?
     ) {
         self.id = id ?? 0
         self.coord = coord
@@ -68,10 +161,9 @@ public struct WeatherDetails: Codable {
         self.main = main ?? MainDetails()
         self.timezone = timezone
         self.name = name
+        self.visibility = visibility ?? .notAvailable
     }
-}
 
-extension WeatherDetails {
     public init(from response: ANWeatherDetails?) {
         self.init(
             id: response?.id,
@@ -82,37 +174,8 @@ extension WeatherDetails {
             weather: response?.weather?.map({ Weather(from: $0) }),
             main: MainDetails(from: response?.main),
             timezone: response?.timezone,
-            name: response?.name
+            name: response?.name,
+            visibility: response?.visibility
         )
     }
 }
-
-// MARK: - Weather
-public struct Weather: Codable {
-    public var id: Int
-    public var main: String
-    public var icon: String
-    public var description: WeatherDescription
-    
-    public init(
-        id: Int?,
-        main: String?,
-        description: WeatherDescription?,
-        icon: String?
-    ) {
-        self.id = id ?? 0
-        self.main = main ?? ""
-        self.description = description ?? .clearSky
-        self.icon = icon ?? ""
-    }
-    
-    public init(from response: ANWeather?) {
-        self.init(
-            id: response?.id,
-            main: response?.main,
-            description: WeatherDescription(rawValue: response?.description ?? ""),
-            icon: response?.icon
-        )
-    }
-}
-
