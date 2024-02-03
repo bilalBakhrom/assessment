@@ -54,7 +54,8 @@ public final class TabBarController: BaseTabBarController {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(systemName: "plus")
         configuration.background.cornerRadius = 32
-        configuration.baseBackgroundColor = .moduleAccent
+        configuration.baseBackgroundColor = .white
+        configuration.baseForegroundColor = .moduleAccent
         
         let view = UIButton(configuration: configuration)
         view.frame = CGRect(origin: .zero, size: CGSize(width: 64, height: 64))
