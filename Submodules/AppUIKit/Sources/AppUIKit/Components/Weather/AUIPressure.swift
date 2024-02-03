@@ -10,12 +10,14 @@ import AppColors
 import AppAssets
 
 public struct AUIPressure: View {
-    public var value: String
-    public var recommendation: String
+    public var value: Int
     
-    public init(value: String, recommendation: String) {
+    private let maxPressure: Int = 1084
+    private let maxiumValue: Int = 130
+    private let stepValue: Int = 10
+    
+    public init(value: Int) {
         self.value = value
-        self.recommendation = recommendation
     }
     
     public var body: some View {
@@ -29,24 +31,27 @@ public struct AUIPressure: View {
                 Spacer(minLength: .zero)
             }
             .font(.system(size: 10))
-            .foregroundStyle(Color.modulePrimaryLabel)
-            .opacity(0.7)
+            .foregroundStyle(Color.modulePrimaryLabel.opacity(0.5))
             
-            Text(value)
-                .font(.system(size: 32))
-                .foregroundStyle(Color.modulePrimaryLabel)
-            
-            Spacer(minLength: .zero)
-            
-            Text(recommendation)
-                .font(.system(size: 12))
-                .foregroundStyle(Color.modulePrimaryLabel)
-                .fixedSize(horizontal: false, vertical: true)
+            GaugeView(
+                valueLabel: "\(value)",
+                unitLabel: "hPa",
+                minLabel: "Low",
+                maxLabel: "High",
+                currentValue: Double(maxPressure - value),
+                maximumValue: maxiumValue,
+                step: stepValue,
+                sweepAngle: 245
+            )
+            .padding(.horizontal)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.moduleTertiaryBackground.opacity(0.5))
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
         .clipShape(.rect(cornerRadius: 12))
     }
 }

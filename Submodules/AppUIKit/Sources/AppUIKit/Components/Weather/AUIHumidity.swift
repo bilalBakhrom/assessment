@@ -27,8 +27,7 @@ public struct AUIHumidity: View {
                 Spacer(minLength: .zero)
             }
             .font(.system(size: 10))
-            .foregroundStyle(Color.modulePrimaryLabel)
-            .opacity(0.7)
+            .foregroundStyle(Color.modulePrimaryLabel.opacity(0.5))
             
             Text(value)
                 .font(.system(size: 32))
@@ -44,7 +43,10 @@ public struct AUIHumidity: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.moduleTertiaryBackground.opacity(0.5))
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
         .clipShape(.rect(cornerRadius: 12))
     }
 }

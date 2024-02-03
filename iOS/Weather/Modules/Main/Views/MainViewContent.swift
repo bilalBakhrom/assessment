@@ -40,66 +40,66 @@ struct MainViewContent: View {
     // MARK: - Views
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 20) {
-                contentHeaderView
-                
-                contentRecommendationView
-                
-                LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
-                    AUIFeelsLike(
-                        value: details.vwFeelsLike,
-                        recommendation: details.feelsLikeRecommendation
-                    )
-                    .frame(width: gridItemWidth, height: gridItemWidth)
+        VStack(spacing: .zero) {
+            contentHeaderView
+                .padding(.top, 60 + safeAreaInsets.top)
+                .padding(.bottom, 20)
+            
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 20) {
+                    contentRecommendationView
                     
-                    AUIVisibility(
-                        value: details.vwVisibility,
-                        recommendation: details.visibilityRecommendation
-                    )
-                    .frame(width: gridItemWidth, height: gridItemWidth)
-                    
-                    AUIHumidity(
-                        value: details.vwHumidity,
-                        recommendation: details.humidityRecommendation
-                    )
-                    .frame(width: gridItemWidth, height: gridItemWidth)
-                    
-                    AUIPressure(
-                        value: details.vwPressure,
-                        recommendation: ""
-                    )
-                    .frame(width: gridItemWidth, height: gridItemWidth)
-                }
-                
-                VStack(spacing: 8) {
-                    Button {
-                        Task { await viewModel.sendEvent(.onTapChange)}
-                    } label: {
-                        Text("Change Location")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(Color.modulePrimaryLabel)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
+                    LazyVGrid(columns: columns, alignment: .center, spacing: 16) {
+                        AUIFeelsLike(
+                            value: details.vwFeelsLike,
+                            recommendation: details.feelsLikeRecommendation
+                        )
+                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        
+                        AUIVisibility(
+                            value: details.vwVisibility,
+                            recommendation: details.visibilityRecommendation
+                        )
+                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        
+                        AUIHumidity(
+                            value: details.vwHumidity,
+                            recommendation: details.humidityRecommendation
+                        )
+                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        
+                        AUIPressure(value: details.main.pressure)
+                            .frame(width: gridItemWidth, height: gridItemWidth)
                     }
-                    .background(Color.moduleAccent)
-                    .clipShape(.rect(cornerRadius: 12))
-                    .opacity(0.8)
                     
-                    if viewModel.hasSelectedCity {
+                    VStack(spacing: 8) {
                         Button {
-                            Task { await viewModel.sendEvent(.removeSelectedCity) }
+                            Task { await viewModel.sendEvent(.onTapChange)}
                         } label: {
-                            Text("Remove")
+                            Text("Change Location")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color.moduleMainRed)
+                                .foregroundStyle(Color.modulePrimaryLabel)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                        }
+                        .background(Color.moduleAccent)
+                        .clipShape(.rect(cornerRadius: 12))
+                        .opacity(0.8)
+                        
+                        if viewModel.hasSelectedCity {
+                            Button {
+                                Task { await viewModel.sendEvent(.removeSelectedCity) }
+                            } label: {
+                                Text("Remove")
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundStyle(Color.moduleMainRed)
+                            }
                         }
                     }
                 }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 100 + safeAreaInsets.bottom)
             }
-            .padding(.top, 60 + safeAreaInsets.top)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 100 + safeAreaInsets.bottom)
         }
         .background(LinearGradient.blueSkyGradient)
     }
@@ -153,7 +153,10 @@ struct MainViewContent: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 4)
         .frame(maxWidth: .infinity)
-        .background(Color.moduleTertiaryBackground.opacity(0.5))
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
         .clipShape(.rect(cornerRadius: 12))
     }
 }
