@@ -22,6 +22,8 @@ final class MainViewModel: BaseViewModel {
     @Published var cities: [City] = []
     @Published var selectedCity: City?
     
+    @Published var scrollOffset: CGPoint = .zero
+    
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
     let networkMonitor: NetworkReachabilityMonitor

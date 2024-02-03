@@ -22,12 +22,38 @@ struct MainViewContent: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Environment(\.windowSize) private var windowSize
     
-    private var gridItemWidth: CGFloat {
+    private let contentHeaderCompactHeight: CGFloat = 100
+    private let contentHeaderHeight: CGFloat = 230
+    private let contentHeaderVPadding: CGFloat = 40
+    
+    private var widgetWidth: CGFloat {
         return (windowSize.width - 56) / 2
     }
     
     private var columns: [GridItem] {
         [GridItem(.flexible()), GridItem(.flexible())]
+    }
+    
+    private var contentHeaderCurrentVPadding: CGFloat {
+        let offsetY = viewModel.scrollOffset.y
+        
+        if offsetY > 0 {
+            return contentHeaderVPadding + offsetY
+        }
+        
+        let result = contentHeaderVPadding - abs(offsetY)
+        
+        return result <= 0 ? 0 : result
+    }
+    
+    private var opacityScrollOffsetY: CGFloat {
+        guard viewModel.scrollOffset.y < 0 else { return 1 }
+        
+        let offsetY = viewModel.scrollOffset.y
+        let result = offsetY + (contentHeaderVPadding * 2) - 20
+        let modifiedValue = result < 0 ? abs(result) : 1
+        
+        return modifiedValue
     }
     
     // MARK: - Initialization
@@ -40,12 +66,8 @@ struct MainViewContent: View {
     // MARK: - Views
     
     var body: some View {
-        VStack(spacing: .zero) {
-            contentHeaderView
-                .padding(.top, 60 + safeAreaInsets.top)
-                .padding(.bottom, 20)
-            
-            ScrollView(showsIndicators: false) {
+        ZStack {
+            AUIScrollView(scrollPosition: $viewModel.scrollOffset) {
                 VStack(spacing: 20) {
                     contentRecommendationView
                     
@@ -54,22 +76,22 @@ struct MainViewContent: View {
                             value: details.vwFeelsLike,
                             recommendation: details.feelsLikeRecommendation
                         )
-                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        .frame(width: widgetWidth, height: widgetWidth)
                         
                         AUIVisibility(
                             value: details.vwVisibility,
                             recommendation: details.visibilityRecommendation
                         )
-                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        .frame(width: widgetWidth, height: widgetWidth)
                         
                         AUIHumidity(
                             value: details.vwHumidity,
                             recommendation: details.humidityRecommendation
                         )
-                        .frame(width: gridItemWidth, height: gridItemWidth)
+                        .frame(width: widgetWidth, height: widgetWidth)
                         
                         AUIPressure(value: details.main.pressure)
-                            .frame(width: gridItemWidth, height: gridItemWidth)
+                            .frame(width: widgetWidth, height: widgetWidth)
                     }
                     
                     VStack(spacing: 8) {
@@ -98,8 +120,18 @@ struct MainViewContent: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 100 + safeAreaInsets.bottom)
+                .padding(.bottom, safeAreaInsets.bottom * 10)
+                .padding(.top, (contentHeaderVPadding * 2) + contentHeaderHeight - contentHeaderCompactHeight)
+            } // :AUIScrollView
+            .padding(.top, contentHeaderCompactHeight + safeAreaInsets.top)
+            
+            VStack {
+                contentHeaderView
+                    .padding(.vertical, contentHeaderCurrentVPadding)
+                
+                Spacer()
             }
+            .padding(.top, safeAreaInsets.top)
         }
         .background(LinearGradient.blueSkyGradient)
     }
@@ -116,18 +148,33 @@ struct MainViewContent: View {
                     .foregroundStyle(Color.modulePrimaryLabel)
             }
             
-            Text(details.vwTemp)
-                .font(.system(size: 100, weight: .medium))
-                .foregroundStyle(Color.modulePrimaryLabel)
+            if opacityScrollOffsetY < 68 {
+                Text(details.vwTemp)
+                    .font(.system(size: 100, weight: .medium))
+                    .foregroundStyle(Color.modulePrimaryLabel)
+                    .opacity(abs(1 - 70 / Double(opacityScrollOffsetY)))
+            } else {
+                Text("\(details.vwTemp) | \(details.description)")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.modulePrimaryLabel)
+                    .transition(.opacity)
+            }
             
             VStack(spacing: 4) {
-                Text(details.description)
+                if opacityScrollOffsetY <= 22 {
+                    Text(details.description)
+                        .transition(.opacity)
+                }
                 
-                Text("H: \(details.vwTempMax)  L: \(details.vwTempMin)")
+                if opacityScrollOffsetY <= 10 {
+                    Text("H: \(details.vwTempMax)  L: \(details.vwTempMin)")
+                        .transition(.opacity)
+                }
             }
             .font(.system(size: 14, weight: .medium))
             .foregroundStyle(Color.modulePrimaryLabel)
         }
+        .animation(.linear(duration: 0.15), value: opacityScrollOffsetY)
     }
     
     private var contentRecommendationView: some View {
@@ -141,7 +188,7 @@ struct MainViewContent: View {
                 .frame(width: 40, height: 40)
             }
             
-            if !viewModel.isFetchingWeatherDetails {
+            if !viewModel.isFetchingWeatherDetails || viewModel.details != nil {
                 Text(details.temperatureRecommendation)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color.modulePrimaryLabel)

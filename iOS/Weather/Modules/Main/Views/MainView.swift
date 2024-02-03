@@ -11,7 +11,7 @@ import AppColors
 import AppSettings
 
 struct MainView: View {
-    @ObservedObject var viewModel: MainViewModel    
+    @ObservedObject var viewModel: MainViewModel
     @EnvironmentObject private var locationManager: LocationManager
     
     init(viewModel: MainViewModel) {
