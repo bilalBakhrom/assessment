@@ -8,6 +8,8 @@
 import UIKit
 import AppBaseController
 import CoreLocation
+import MainPageUI
+import ForecastPageUI
 
 public final class TabBarController: BaseTabBarController {
     // MARK: - Properties

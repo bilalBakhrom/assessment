@@ -15,7 +15,7 @@ public struct LocationPickerDependency {
     public let networkMonitor: NetworkReachabilityMonitor
     public let geocodingRepo: GeocodingRepoProtocol
     
-    init(
+    public init(
         applicationSettings: ApplicationSettings,
         networkMonitor: NetworkReachabilityMonitor,
         geocodingRepo: GeocodingRepoProtocol = GeocodingRepo()

@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D555ED052B6E3959001E2EE7 /* MainViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED042B6E3959001E2EE7 /* MainViewContent.swift */; };
-		D555ED072B6E3DB2001E2EE7 /* MainViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */; };
-		D555ED0B2B6F2F10001E2EE7 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */; };
-		D555ED0D2B6F2F14001E2EE7 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */; };
-		D555ED0F2B6F2F19001E2EE7 /* LocationPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */; };
-		D555ED112B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */; };
 		D5596B2A2B6BE8E400A2887C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B292B6BE8E400A2887C /* AppDelegate.swift */; };
 		D5596B2C2B6BE8E400A2887C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B2B2B6BE8E400A2887C /* SceneDelegate.swift */; };
 		D5596B332B6BE8E600A2887C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5596B322B6BE8E600A2887C /* Assets.xcassets */; };
@@ -38,25 +32,16 @@
 		D5596B692B6BFA7A00A2887C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B682B6BFA7900A2887C /* TabBarController.swift */; };
 		D5596B6B2B6BFA8000A2887C /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B6A2B6BFA8000A2887C /* TabBarViewModel.swift */; };
 		D5596B6D2B6BFA8600A2887C /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B6C2B6BFA8600A2887C /* TabBarCoordinator.swift */; };
-		D5596B712B6BFB7B00A2887C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B702B6BFB7B00A2887C /* MainViewController.swift */; };
-		D5596B732B6BFB7F00A2887C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B722B6BFB7F00A2887C /* MainView.swift */; };
-		D5596B752B6BFB8400A2887C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B742B6BFB8400A2887C /* MainViewModel.swift */; };
-		D5596B772B6BFB8900A2887C /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B762B6BFB8900A2887C /* MainCoordinator.swift */; };
-		D5596B792B6BFB9500A2887C /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B782B6BFB9500A2887C /* ForecastViewController.swift */; };
-		D5596B7B2B6BFB9900A2887C /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7A2B6BFB9900A2887C /* ForecastView.swift */; };
-		D5596B7D2B6BFB9D00A2887C /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */; };
-		D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */; };
 		D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B802B6BFD8100A2887C /* RootCoordinator.swift */; };
-		D5F3AA362B701ACC0013DAD1 /* ForecastViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */; };
+		D5F3AA3B2B7029330013DAD1 /* ForecastPageUI in Resources */ = {isa = PBXBuildFile; fileRef = D5F3AA3A2B7029330013DAD1 /* ForecastPageUI */; };
+		D5F3AA3D2B7029410013DAD1 /* ForecastPageUI in Frameworks */ = {isa = PBXBuildFile; productRef = D5F3AA3C2B7029410013DAD1 /* ForecastPageUI */; };
+		D5F3AA3F2B702A200013DAD1 /* MainPageUI in Resources */ = {isa = PBXBuildFile; fileRef = D5F3AA3E2B702A200013DAD1 /* MainPageUI */; };
+		D5F3AA412B702A890013DAD1 /* MainPageUI in Frameworks */ = {isa = PBXBuildFile; productRef = D5F3AA402B702A890013DAD1 /* MainPageUI */; };
+		D5F3AA432B702AB10013DAD1 /* LocationPageUI in Resources */ = {isa = PBXBuildFile; fileRef = D5F3AA422B702AB10013DAD1 /* LocationPageUI */; };
+		D5F3AA452B702ADA0013DAD1 /* LocationPageUI in Frameworks */ = {isa = PBXBuildFile; productRef = D5F3AA442B702ADA0013DAD1 /* LocationPageUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D555ED042B6E3959001E2EE7 /* MainViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContent.swift; sourceTree = "<group>"; };
-		D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPlaceholder.swift; sourceTree = "<group>"; };
-		D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
-		D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
-		D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewModel.swift; sourceTree = "<group>"; };
-		D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerCoordinator.swift; sourceTree = "<group>"; };
 		D5596B262B6BE8E400A2887C /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5596B292B6BE8E400A2887C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5596B2B2B6BE8E400A2887C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,16 +60,10 @@
 		D5596B682B6BFA7900A2887C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D5596B6A2B6BFA8000A2887C /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		D5596B6C2B6BFA8600A2887C /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		D5596B702B6BFB7B00A2887C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		D5596B722B6BFB7F00A2887C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		D5596B742B6BFB8400A2887C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		D5596B762B6BFB8900A2887C /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		D5596B782B6BFB9500A2887C /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
-		D5596B7A2B6BFB9900A2887C /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
-		D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
-		D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCoordinator.swift; sourceTree = "<group>"; };
 		D5596B802B6BFD8100A2887C /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewContent.swift; sourceTree = "<group>"; };
+		D5F3AA3A2B7029330013DAD1 /* ForecastPageUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ForecastPageUI; sourceTree = "<group>"; };
+		D5F3AA3E2B702A200013DAD1 /* MainPageUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MainPageUI; sourceTree = "<group>"; };
+		D5F3AA422B702AB10013DAD1 /* LocationPageUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocationPageUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +75,13 @@
 				D5596B602B6BEDC500A2887C /* AppModels in Frameworks */,
 				D5596B5A2B6BEDC500A2887C /* AppColors in Frameworks */,
 				D5596B562B6BEDC500A2887C /* AppAssets in Frameworks */,
+				D5F3AA3D2B7029410013DAD1 /* ForecastPageUI in Frameworks */,
 				D5596B662B6BEDC500A2887C /* AppUIKit in Frameworks */,
+				D5F3AA412B702A890013DAD1 /* MainPageUI in Frameworks */,
 				D5596B582B6BEDC500A2887C /* AppBaseController in Frameworks */,
 				D5596B642B6BEDC500A2887C /* AppSettings in Frameworks */,
 				D5596B5E2B6BEDC500A2887C /* AppFoundation in Frameworks */,
+				D5F3AA452B702ADA0013DAD1 /* LocationPageUI in Frameworks */,
 				D5596B5C2B6BEDC500A2887C /* AppCoreData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,27 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D555ED082B6E3DBB001E2EE7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D5596B722B6BFB7F00A2887C /* MainView.swift */,
-				D555ED042B6E3959001E2EE7 /* MainViewContent.swift */,
-				D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D555ED092B6F2EF9001E2EE7 /* LocationPicker */ = {
-			isa = PBXGroup;
-			children = (
-				D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */,
-				D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */,
-				D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */,
-				D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */,
-			);
-			path = LocationPicker;
-			sourceTree = "<group>";
-		};
 		D5596B1D2B6BE8E400A2887C = {
 			isa = PBXGroup;
 			children = (
@@ -162,9 +123,6 @@
 				D5596B3F2B6BE97700A2887C /* Delegates */,
 				D5596B402B6BE99200A2887C /* Launch */,
 				D5596B672B6BFA6200A2887C /* TabBar */,
-				D5596B6E2B6BFB6500A2887C /* Main */,
-				D555ED092B6F2EF9001E2EE7 /* LocationPicker */,
-				D5596B6F2B6BFB6800A2887C /* Forecast */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -207,6 +165,9 @@
 				D5596B4A2B6BEB9B00A2887C /* AppBaseController */,
 				D5596B482B6BEB9B00A2887C /* AppCoreData */,
 				D5596B452B6BEB9B00A2887C /* AppUIKit */,
+				D5F3AA3E2B702A200013DAD1 /* MainPageUI */,
+				D5F3AA422B702AB10013DAD1 /* LocationPageUI */,
+				D5F3AA3A2B7029330013DAD1 /* ForecastPageUI */,
 			);
 			name = Submodules;
 			path = ../Submodules;
@@ -227,37 +188,6 @@
 				D5596B6C2B6BFA8600A2887C /* TabBarCoordinator.swift */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		D5596B6E2B6BFB6500A2887C /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				D555ED082B6E3DBB001E2EE7 /* Views */,
-				D5596B702B6BFB7B00A2887C /* MainViewController.swift */,
-				D5596B742B6BFB8400A2887C /* MainViewModel.swift */,
-				D5596B762B6BFB8900A2887C /* MainCoordinator.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		D5596B6F2B6BFB6800A2887C /* Forecast */ = {
-			isa = PBXGroup;
-			children = (
-				D5F3AA372B7028C90013DAD1 /* Views */,
-				D5596B782B6BFB9500A2887C /* ForecastViewController.swift */,
-				D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */,
-				D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */,
-			);
-			path = Forecast;
-			sourceTree = "<group>";
-		};
-		D5F3AA372B7028C90013DAD1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D5596B7A2B6BFB9900A2887C /* ForecastView.swift */,
-				D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +216,9 @@
 				D5596B612B6BEDC500A2887C /* AppNetwork */,
 				D5596B632B6BEDC500A2887C /* AppSettings */,
 				D5596B652B6BEDC500A2887C /* AppUIKit */,
+				D5F3AA3C2B7029410013DAD1 /* ForecastPageUI */,
+				D5F3AA402B702A890013DAD1 /* MainPageUI */,
+				D5F3AA442B702ADA0013DAD1 /* LocationPageUI */,
 			);
 			productName = Weather;
 			productReference = D5596B262B6BE8E400A2887C /* Weather.app */;
@@ -333,8 +266,11 @@
 				D5596B4D2B6BEB9B00A2887C /* AppAssets in Resources */,
 				D5596B4E2B6BEB9C00A2887C /* AppUIKit in Resources */,
 				D5596B4B2B6BEB9B00A2887C /* AppColors in Resources */,
+				D5F3AA432B702AB10013DAD1 /* LocationPageUI in Resources */,
+				D5F3AA3B2B7029330013DAD1 /* ForecastPageUI in Resources */,
 				D5596B4C2B6BEB9B00A2887C /* AppFoundation in Resources */,
 				D5596B512B6BEB9C00A2887C /* AppCoreData in Resources */,
+				D5F3AA3F2B702A200013DAD1 /* MainPageUI in Resources */,
 				D5596B362B6BE8E600A2887C /* LaunchScreen.storyboard in Resources */,
 				D5596B532B6BEB9C00A2887C /* AppBaseController in Resources */,
 				D5596B522B6BEB9C00A2887C /* AppNetwork in Resources */,
@@ -351,26 +287,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5596B6B2B6BFA8000A2887C /* TabBarViewModel.swift in Sources */,
-				D555ED0B2B6F2F10001E2EE7 /* LocationPickerViewController.swift in Sources */,
-				D5596B732B6BFB7F00A2887C /* MainView.swift in Sources */,
-				D5596B7B2B6BFB9900A2887C /* ForecastView.swift in Sources */,
 				D5596B692B6BFA7A00A2887C /* TabBarController.swift in Sources */,
-				D5F3AA362B701ACC0013DAD1 /* ForecastViewContent.swift in Sources */,
 				D5596B2A2B6BE8E400A2887C /* AppDelegate.swift in Sources */,
-				D555ED0D2B6F2F14001E2EE7 /* LocationPickerView.swift in Sources */,
-				D5596B712B6BFB7B00A2887C /* MainViewController.swift in Sources */,
 				D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */,
-				D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */,
-				D555ED0F2B6F2F19001E2EE7 /* LocationPickerViewModel.swift in Sources */,
 				D5596B6D2B6BFA8600A2887C /* TabBarCoordinator.swift in Sources */,
-				D555ED112B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift in Sources */,
-				D555ED072B6E3DB2001E2EE7 /* MainViewPlaceholder.swift in Sources */,
 				D5596B2C2B6BE8E400A2887C /* SceneDelegate.swift in Sources */,
-				D555ED052B6E3959001E2EE7 /* MainViewContent.swift in Sources */,
-				D5596B792B6BFB9500A2887C /* ForecastViewController.swift in Sources */,
-				D5596B7D2B6BFB9D00A2887C /* ForecastViewModel.swift in Sources */,
-				D5596B772B6BFB8900A2887C /* MainCoordinator.swift in Sources */,
-				D5596B752B6BFB8400A2887C /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +553,18 @@
 		D5596B652B6BEDC500A2887C /* AppUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppUIKit;
+		};
+		D5F3AA3C2B7029410013DAD1 /* ForecastPageUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ForecastPageUI;
+		};
+		D5F3AA402B702A890013DAD1 /* MainPageUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainPageUI;
+		};
+		D5F3AA442B702ADA0013DAD1 /* LocationPageUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationPageUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

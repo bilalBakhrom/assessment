@@ -9,6 +9,7 @@ import Foundation
 import AppBaseController
 import AppSettings
 import AppNetwork
+import LocationPageUI
 
 public struct TabBarDependency {
     public let applicationSettings: ApplicationSettings
