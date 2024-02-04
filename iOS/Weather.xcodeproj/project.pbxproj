@@ -243,13 +243,21 @@
 		D5596B6F2B6BFB6800A2887C /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
+				D5F3AA372B7028C90013DAD1 /* Views */,
 				D5596B782B6BFB9500A2887C /* ForecastViewController.swift */,
-				D5596B7A2B6BFB9900A2887C /* ForecastView.swift */,
-				D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */,
 				D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */,
 				D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */,
 			);
 			path = Forecast;
+			sourceTree = "<group>";
+		};
+		D5F3AA372B7028C90013DAD1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D5596B7A2B6BFB9900A2887C /* ForecastView.swift */,
+				D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

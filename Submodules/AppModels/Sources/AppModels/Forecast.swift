@@ -18,16 +18,19 @@ public struct Forecast: Codable, Identifiable {
         weather.first?.description.description ?? ""
     }
     
-    public var temp: Int {
-        Int(main.temp)
+    public var vwTemp: String {
+        let value = Int(main.temp)
+        return value == .notAvailable ? "-" : "\(value)°"
+    }
+     
+    public var vwTempMax: String {
+        let value = Int(main.tempMax)
+        return value == .notAvailable ? "-" : "\(value)°"
     }
     
-    public var tempMax: Int {
-        Int(main.tempMax)
-    }
-    
-    public var tempMin: Int {
-        Int(main.tempMin)
+    public var vwTempMin: String {
+        let value = Int(main.tempMin)
+        return value == .notAvailable ? "-" : "\(value)°"
     }
     
     public var date: Date {
@@ -54,11 +57,31 @@ public struct Forecast: Codable, Identifiable {
     public var formattedDate: String {
         // Initialize a DateFormatter for the weekday
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE +HH"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "HH"
+        dateFormatter.timeZone = .autoupdatingCurrent
         
-        // Convert the Date to a String with the weekday name
-        return dateFormatter.string(from: date)
+        // Define a tolerance in seconds
+        let tolerance: TimeInterval = 6400
+        
+        let isNow = abs(date.timeIntervalSinceNow) <= tolerance
+        
+        if isNow {
+            return "Now"
+        } else {
+            return dateFormatter.string(from: date)
+        }
+    }
+    
+    public var formattedDateByWeekName: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        dateFormatter.timeZone = .autoupdatingCurrent
+        
+        if Calendar.current.isDateInToday(date) {
+            return "Today"
+        } else {
+            return dateFormatter.string(from: date)
+        }
     }
     
     public init(

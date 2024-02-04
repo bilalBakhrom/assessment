@@ -24,9 +24,9 @@ public struct DailyForecasts: Codable {
     }
     
     // Returns the next 24 hours' forecasts
-    public var next24HoursForecasts: [Forecast] {
+    public var next48HoursForecasts: [Forecast] {
         let now = Date().timeIntervalSince1970
-        let endOfNext24Hours = now + 24 * 60 * 60 // 24 hours in seconds
+        let endOfNext24Hours = now + 24 * 60 * 60 * 2// 24 hours in seconds
         
         return list
             .filter { $0.timestamp >= Int(now) && $0.timestamp <= Int(endOfNext24Hours) }
@@ -34,7 +34,9 @@ public struct DailyForecasts: Codable {
     }
     
     public var averageForecasts: [Forecast] {
-        forecastsByDate.compactMap { $0.value[safe: 1] ?? $0.value.first }
+        forecastsByDate
+            .compactMap { $0.value[safe: 1] ?? $0.value.first }
+            .sorted { $0.timestamp < $1.timestamp }
     }
     
     public init(
