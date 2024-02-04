@@ -30,10 +30,28 @@ public struct Forecast: Codable, Identifiable {
         Int(main.tempMin)
     }
     
+    public var date: Date {
+        Date(timeIntervalSince1970: TimeInterval(timestamp))
+    }
+    
+    public var dateByDay: String {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+         
+        if let year = components.year,
+           let month = components.month,
+           let day = components.day {
+            
+            return "\(year).\(month).\(day)"
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            
+            return dateFormatter.string(from: date)
+        }
+    }
+    
     public var formattedDate: String {
-        // Create a Date instance from the timestamp
-        let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-        
         // Initialize a DateFormatter for the weekday
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE +HH"

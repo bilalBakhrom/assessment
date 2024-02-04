@@ -47,6 +47,7 @@
 		D5596B7D2B6BFB9D00A2887C /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */; };
 		D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */; };
 		D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B802B6BFD8100A2887C /* RootCoordinator.swift */; };
+		D5F3AA362B701ACC0013DAD1 /* ForecastViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCoordinator.swift; sourceTree = "<group>"; };
 		D5596B802B6BFD8100A2887C /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			children = (
 				D5596B782B6BFB9500A2887C /* ForecastViewController.swift */,
 				D5596B7A2B6BFB9900A2887C /* ForecastView.swift */,
+				D5F3AA352B701ACC0013DAD1 /* ForecastViewContent.swift */,
 				D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */,
 				D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */,
 			);
@@ -344,6 +347,7 @@
 				D5596B732B6BFB7F00A2887C /* MainView.swift in Sources */,
 				D5596B7B2B6BFB9900A2887C /* ForecastView.swift in Sources */,
 				D5596B692B6BFA7A00A2887C /* TabBarController.swift in Sources */,
+				D5F3AA362B701ACC0013DAD1 /* ForecastViewContent.swift in Sources */,
 				D5596B2A2B6BE8E400A2887C /* AppDelegate.swift in Sources */,
 				D555ED0D2B6F2F14001E2EE7 /* LocationPickerView.swift in Sources */,
 				D5596B712B6BFB7B00A2887C /* MainViewController.swift in Sources */,

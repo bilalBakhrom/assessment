@@ -43,7 +43,7 @@ public struct City: Codable, Identifiable {
         )
     }
     
-    public init(from response: ANForecastContent.City?) {
+    public init(from response: ANDailyForecasts.City?) {
         self.init(
             name: response?.name,
             lat: response?.coord?.lat,

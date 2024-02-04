@@ -76,13 +76,13 @@ public extension ApplicationSettings {
         }
     }
     
-    var forecastContent: ForecastContent? {
+    var forecastContent: DailyForecasts? {
         get {
             guard let data = storage.data(forKey: .forecastContent) else {
                 return nil
             }
             
-            return try? JSONDecoder().decode(ForecastContent.self, from: data)
+            return try? JSONDecoder().decode(DailyForecasts.self, from: data)
         }
         set {
             guard let content = newValue,

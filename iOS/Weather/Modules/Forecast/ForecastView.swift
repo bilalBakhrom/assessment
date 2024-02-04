@@ -25,8 +25,8 @@ struct ForecastView: View {
                     ProgressView()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                content
+            } else if let content = viewModel.content {
+                ForecastViewContent(viewModel: viewModel, content: content)
             }
         }
         .ignoresSafeArea()
@@ -35,34 +35,5 @@ struct ForecastView: View {
             ? LinearGradient.daylightGradient
             : LinearGradient.nightGradient
         )
-    }
-    
-    private var content: some View {
-        ZStack {
-            if let content = viewModel.content {
-                AUIList {
-                    Section {
-                        ForEach(content.list) { forecast in
-                            HStack {
-                                Text(forecast.formattedDate)
-                                
-                                Spacer()
-                                
-                                Text("H: \(forecast.tempMax)°  L: \(forecast.tempMin)°")
-                            }
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundStyle(Color.modulePrimaryLabel)
-                            .id(forecast.id)
-                        }
-                    } header: {
-                        Text("5-day forecast".uppercased())
-                            .font(.system(size: 12))
-                            .foregroundStyle(Color.modulePrimaryLabel)
-                    }
-                }
-                .listStyle(.grouped)
-            }
-        }
-        .padding(.top, safeAreaInsets.top)
     }
 }

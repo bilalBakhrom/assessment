@@ -15,7 +15,7 @@ final class ForecastViewModel: BaseViewModel {
     // MARK: - Properties
     
     @Published var isFetchingForecast: Bool = false
-    @Published var content: ForecastContent?
+    @Published var content: DailyForecasts?
     
     let applicationSettings: ApplicationSettings
     let locationManager: LocationManager
@@ -69,12 +69,13 @@ extension ForecastViewModel {
         isFetchingForecast = true
         
         do {
+            content = nil
             // Create a request model.
             let model = RMForecast(lat: lat, lon: lon)
             // Fetch forecase data.
             let response = try await weatherRepo.fetchForecast(model: model)
             // Convert data.
-            let content = ForecastContent(from: response)
+            let content = DailyForecasts(from: response)
             // Cache data.
             applicationSettings.forecastContent = content
             applicationSettings.isDaylight = content.isDaylight
