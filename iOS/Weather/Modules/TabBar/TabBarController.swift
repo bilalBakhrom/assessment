@@ -52,7 +52,7 @@ public final class TabBarController: BaseTabBarController {
     
     private lazy var middleButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
-        configuration.image = UIImage(systemName: "plus")
+        configuration.image = UIImage(systemName: "mappin.and.ellipse")
         configuration.background.cornerRadius = 32
         configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = .moduleAccent
@@ -108,9 +108,10 @@ public final class TabBarController: BaseTabBarController {
         appearance.configureWithTransparentBackground()
         appearance.shadowColor = .white
         appearance.backgroundColor = isDaylight ? .moduleAccent : UIColor(hex: "47438b")
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.white.withAlphaComponent(0.7)
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white.withAlphaComponent(0.7)]
         
         tabBar.tintColor = .white
-        tabBar.unselectedItemTintColor = .white.withAlphaComponent(0.7)
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
     }
