@@ -1,20 +1,17 @@
 //
-//  MainLocationPickerView.swift
+//  LocationPickerView.swift
 //  Weather
 //
-//  Created by Bilal Bakhrom on 2024-02-02.
+//  Created by Bilal Bakhrom on 2024-02-04.
 //
 
 import SwiftUI
 import AppUIKit
-import AppColors
 
-struct MainLocationPickerView: View {
-    @ObservedObject var viewModel: MainViewModel
+struct LocationPickerView: View {
+    @ObservedObject var viewModel: LocationPickerViewModel
     
-    @Environment(\.dismiss) private var dismiss
-    
-    init(viewModel: MainViewModel) {
+    init(viewModel: LocationPickerViewModel) {
         self.viewModel = viewModel
     }
     
@@ -28,7 +25,7 @@ struct MainLocationPickerView: View {
                     Spacer()
                     
                     Button {
-                        dismiss.callAsFunction()
+                        Task { await viewModel.sendEvent(.onTapCloseButton) }
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
@@ -44,10 +41,7 @@ struct MainLocationPickerView: View {
                     isSearchBarActive: $viewModel.isSearchBarActive
                 )
                 .padding(.horizontal, 20)
-                .padding(.bottom)
-                .onChange(of: viewModel.query) { query in
-                    Task { await viewModel.sendEvent(.fetchCities(query: query)) }
-                }
+                .padding(.bottom)                
                 
                 if !viewModel.cities.isEmpty {
                     AUIList {

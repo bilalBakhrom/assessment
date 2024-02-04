@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		D555ED052B6E3959001E2EE7 /* MainViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED042B6E3959001E2EE7 /* MainViewContent.swift */; };
 		D555ED072B6E3DB2001E2EE7 /* MainViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */; };
+		D555ED0B2B6F2F10001E2EE7 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */; };
+		D555ED0D2B6F2F14001E2EE7 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */; };
+		D555ED0F2B6F2F19001E2EE7 /* LocationPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */; };
+		D555ED112B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */; };
 		D5596B2A2B6BE8E400A2887C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B292B6BE8E400A2887C /* AppDelegate.swift */; };
 		D5596B2C2B6BE8E400A2887C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B2B2B6BE8E400A2887C /* SceneDelegate.swift */; };
 		D5596B332B6BE8E600A2887C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5596B322B6BE8E600A2887C /* Assets.xcassets */; };
@@ -43,12 +47,15 @@
 		D5596B7D2B6BFB9D00A2887C /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */; };
 		D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */; };
 		D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B802B6BFD8100A2887C /* RootCoordinator.swift */; };
-		D5596B862B6C7F9A00A2887C /* MainLocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D555ED042B6E3959001E2EE7 /* MainViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewContent.swift; sourceTree = "<group>"; };
 		D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPlaceholder.swift; sourceTree = "<group>"; };
+		D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
+		D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
+		D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewModel.swift; sourceTree = "<group>"; };
+		D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerCoordinator.swift; sourceTree = "<group>"; };
 		D5596B262B6BE8E400A2887C /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5596B292B6BE8E400A2887C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5596B2B2B6BE8E400A2887C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +83,6 @@
 		D5596B7C2B6BFB9D00A2887C /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		D5596B7E2B6BFBA100A2887C /* ForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCoordinator.swift; sourceTree = "<group>"; };
 		D5596B802B6BFD8100A2887C /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +111,19 @@
 				D5596B722B6BFB7F00A2887C /* MainView.swift */,
 				D555ED042B6E3959001E2EE7 /* MainViewContent.swift */,
 				D555ED062B6E3DB2001E2EE7 /* MainViewPlaceholder.swift */,
-				D5596B852B6C7F9A00A2887C /* MainLocationPickerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D555ED092B6F2EF9001E2EE7 /* LocationPicker */ = {
+			isa = PBXGroup;
+			children = (
+				D555ED0A2B6F2F10001E2EE7 /* LocationPickerViewController.swift */,
+				D555ED0C2B6F2F14001E2EE7 /* LocationPickerView.swift */,
+				D555ED0E2B6F2F19001E2EE7 /* LocationPickerViewModel.swift */,
+				D555ED102B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift */,
+			);
+			path = LocationPicker;
 			sourceTree = "<group>";
 		};
 		D5596B1D2B6BE8E400A2887C = {
@@ -145,6 +161,7 @@
 				D5596B402B6BE99200A2887C /* Launch */,
 				D5596B672B6BFA6200A2887C /* TabBar */,
 				D5596B6E2B6BFB6500A2887C /* Main */,
+				D555ED092B6F2EF9001E2EE7 /* LocationPicker */,
 				D5596B6F2B6BFB6800A2887C /* Forecast */,
 			);
 			path = Modules;
@@ -323,15 +340,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5596B6B2B6BFA8000A2887C /* TabBarViewModel.swift in Sources */,
-				D5596B862B6C7F9A00A2887C /* MainLocationPickerView.swift in Sources */,
+				D555ED0B2B6F2F10001E2EE7 /* LocationPickerViewController.swift in Sources */,
 				D5596B732B6BFB7F00A2887C /* MainView.swift in Sources */,
 				D5596B7B2B6BFB9900A2887C /* ForecastView.swift in Sources */,
 				D5596B692B6BFA7A00A2887C /* TabBarController.swift in Sources */,
 				D5596B2A2B6BE8E400A2887C /* AppDelegate.swift in Sources */,
+				D555ED0D2B6F2F14001E2EE7 /* LocationPickerView.swift in Sources */,
 				D5596B712B6BFB7B00A2887C /* MainViewController.swift in Sources */,
 				D5596B812B6BFD8100A2887C /* RootCoordinator.swift in Sources */,
 				D5596B7F2B6BFBA100A2887C /* ForecastCoordinator.swift in Sources */,
+				D555ED0F2B6F2F19001E2EE7 /* LocationPickerViewModel.swift in Sources */,
 				D5596B6D2B6BFA8600A2887C /* TabBarCoordinator.swift in Sources */,
+				D555ED112B6F2F1F001E2EE7 /* LocationPickerCoordinator.swift in Sources */,
 				D555ED072B6E3DB2001E2EE7 /* MainViewPlaceholder.swift in Sources */,
 				D5596B2C2B6BE8E400A2887C /* SceneDelegate.swift in Sources */,
 				D555ED052B6E3959001E2EE7 /* MainViewContent.swift in Sources */,

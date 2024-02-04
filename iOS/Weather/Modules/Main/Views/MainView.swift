@@ -33,9 +33,5 @@ struct MainView: View {
             }
         }
         .ignoresSafeArea()
-        .sheet(isPresented: $viewModel.isLocationPickerPresented) {
-            MainLocationPickerView(viewModel: viewModel)
-                .background(Color.modulePrimaryBackground)
-        }
     }
 }

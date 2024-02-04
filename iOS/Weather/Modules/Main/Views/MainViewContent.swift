@@ -101,28 +101,13 @@ struct MainViewContent: View {
                             .frame(width: widgetWidth, height: widgetWidth)
                     }
                     
-                    VStack(spacing: 8) {
+                    if viewModel.hasSelectedCity {
                         Button {
-                            Task { await viewModel.sendEvent(.onTapChange)}
+                            Task { await viewModel.sendEvent(.removeSelectedCity) }
                         } label: {
-                            Text("Change Location")
+                            Text("Remove")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color.modulePrimaryLabel)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                        }
-                        .background(Color.moduleAccent)
-                        .clipShape(.rect(cornerRadius: 12))
-                        .opacity(0.8)
-                        
-                        if viewModel.hasSelectedCity {
-                            Button {
-                                Task { await viewModel.sendEvent(.removeSelectedCity) }
-                            } label: {
-                                Text("Remove")
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundStyle(Color.moduleMainRed)
-                            }
+                                .foregroundStyle(Color.moduleMainRed)
                         }
                     }
                 }

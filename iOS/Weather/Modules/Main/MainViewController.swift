@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppBaseController
+import AppModels
 
 final class MainController: BaseViewController {
     // MARK: - Properties
@@ -76,6 +77,14 @@ final class MainController: BaseViewController {
                 Task {
                     await self.viewModel.sendEvent(.fetchWeatherDetails(location: location))
                 }
+            }
+            .store(in: &subscriptions)
+        
+        NotificationCenter.default
+            .publisher(appNotif: .didSelectCity)
+            .sink { [weak self] notification in
+                guard let self, let city = notification.object as? City else { return }
+                Task { await self.viewModel.sendEvent(.updateCity(city: city)) }
             }
             .store(in: &subscriptions)
     }

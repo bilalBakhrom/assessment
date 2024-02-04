@@ -24,3 +24,23 @@ public final class TabBarViewModel: BaseViewModel {
         self.networkMonitor = coordinator.dependency.networkMonitor
     }
 }
+
+// MARK: - INTERNAL MODELS
+
+extension TabBarViewModel {
+    enum ViewEvent {
+        case onTapMiddleButton
+    }
+}
+
+// MARK: - EVENTS
+
+@MainActor
+extension TabBarViewModel {
+    func sendEvent(_ event: ViewEvent) async {
+        switch event {
+        case .onTapMiddleButton:
+            coordinator.presentLocationPicker()
+        }
+    }
+}

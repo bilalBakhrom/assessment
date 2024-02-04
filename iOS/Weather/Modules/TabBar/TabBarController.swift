@@ -122,14 +122,6 @@ public final class TabBarController: BaseTabBarController {
     
     @objc
     private func handleMiddleButtonClick() {
-        let alertController = UIAlertController(
-            title: "Middle Button Alert",
-            message: "In process..",
-            preferredStyle: .alert
-        )
-        
-        alertController.addAction(.init(title: "Ok", style: .cancel))
-        
-        present(alertController, animated: true)
+        Task { await viewModel.sendEvent(.onTapMiddleButton) }
     }
 }

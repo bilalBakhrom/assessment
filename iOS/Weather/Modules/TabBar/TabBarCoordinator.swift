@@ -41,3 +41,19 @@ public final class TabBarCoordinator: BaseCoordinator {
         navigationController.pushViewController(viewController, animated: animated)
     }
 }
+
+extension TabBarCoordinator {
+    func presentLocationPicker() {
+        let dependency = LocationPickerDependency(
+            applicationSettings: dependency.applicationSettings,
+            networkMonitor: dependency.networkMonitor
+        )
+        
+        let coordinator = LocationPickerCoordinator(
+            dependency,
+            navigationController: navigationController
+        )
+        
+        coordinate(to: coordinator)
+    }
+}

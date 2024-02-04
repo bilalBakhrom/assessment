@@ -13,13 +13,8 @@ import AppNetwork
 import AppModels
 
 final class MainViewModel: BaseViewModel {
-    @Published var query: String = ""
     @Published var details: WeatherDetails?
-    @Published var isSearchBarActive: Bool = false
     @Published var isFetchingWeatherDetails: Bool = false
-    @Published var isFetchingCities: Bool = false
-    @Published var isLocationPickerPresented: Bool = false
-    @Published var cities: [City] = []
     @Published var selectedCity: City?
     
     @Published var scrollOffset: CGPoint = .zero
@@ -59,14 +54,12 @@ final class MainViewModel: BaseViewModel {
 
 extension MainViewModel {
     enum ViewEvent {
-        case fetchCities(query: String)
         case fetchWeatherDetails(location: AppCoordinates)
         case openSettings
-        case onTapChange
-        case onTapCity(city: City)
         case requestLocationAuthorization
         case removeSelectedCity
         case startUpdatingLocation
+        case updateCity(city: City)
     }
 }
 
@@ -76,10 +69,6 @@ extension MainViewModel {
 extension MainViewModel {
     func sendEvent(_ event: ViewEvent) async {
         switch event {
-        case .fetchCities(let query):
-            // Handle fetching cities based on a given query string.
-            await fetchCities(with: query)
-            
         case .fetchWeatherDetails(let location):
             // Fetch weather details for a given location or selected city.
             if let city = selectedCity {
@@ -92,13 +81,6 @@ extension MainViewModel {
             // Open application settings, typically to allow the user to change location permissions.
             openSettings()
             
-        case .onTapChange:
-            // Handle the event when the user taps to change the location manually.
-            isLocationPickerPresented = true
-            
-        case .onTapCity(let city):
-            await handleCitySelection(city)
-            
         case .requestLocationAuthorization:
             // Requests authorization to access the user's location.
             locationManager.requestLocationAuthorization()
@@ -109,25 +91,11 @@ extension MainViewModel {
         case .startUpdatingLocation:
             // Starts updating the user's location to provide up-to-date weather information.
             locationManager.startUpdatingLocation()
+            
+        case .updateCity(let city):
+            selectedCity = city
+            await fetchWeatherDetails(lat: city.lat, lon: city.lon)
         }
-    }
-    
-    private func handleCitySelection(_ city: City) async {
-        // Handle the event when a city is selected from the list.
-        // Updates the selected city, application settings, and notifies others of the selection.
-        selectedCity = city
-        applicationSettings.userSelectedCity = city
-        NotificationCenter.default.post(appNotif: .didSelectCity, object: city)
-        
-        // Dismisses the location picker.
-        isLocationPickerPresented = false
-        
-        // Clear query.
-        cities = []
-        query = ""
-        
-        // Fetch weather details for the selected city.
-        await fetchWeatherDetails(lat: city.lat, lon: city.lon)
     }
     
     private func handleCityRemoval() async {
@@ -165,21 +133,5 @@ extension MainViewModel {
         }
         
         isFetchingWeatherDetails = false
-    }
-    
-    private func fetchCities(with query: String) async {
-        guard !isFetchingCities, !query.isEmpty, networkMonitor.isReachable else { return }
-        
-        isFetchingCities = true
-        
-        do {
-            let model = RMGeocoding(query: query)
-            let response = try await geocodingRepo.fetchCities(with: model)
-            cities = response.map({ City(from: $0) })
-        } catch {
-            reportError(error)
-        }
-        
-        isFetchingCities = false
     }
 }
