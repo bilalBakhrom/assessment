@@ -37,7 +37,7 @@ public final class LocationPickerCoordinator: BaseCoordinator {
     public override func start(animated: Bool = true) {
         let viewModel = LocationPickerViewModel(coordinator: self)
         let viewController = LocationPickerViewController(viewModel: viewModel)
-        viewController.isModalInPresentation = false
+        viewController.isModalInPresentation = true
         
         navigationController.present(viewController, animated: true)
     }
