@@ -24,5 +24,7 @@ extension ANForecastContent {
         public let country: String?
         public let population: Int?
         public let timezone: Int?
+        public var sunset: Int?
+        public var sunrise: Int?
     }
 }

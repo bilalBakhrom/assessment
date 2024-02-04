@@ -80,6 +80,7 @@ public final class TabBarController: BaseTabBarController {
         bind()
         setViewControllers([mainViewController, middleViewController, forecastViewController], animated: false)
         view.addSubview(middleButton)
+        updateTabBarAppearance()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +103,18 @@ public final class TabBarController: BaseTabBarController {
         middleButton.layer.cornerRadius = middleButton.frame.height / 2
     }
     
+    private func updateTabBarAppearance(isDaylight: Bool = true) {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = .white
+        appearance.backgroundColor = isDaylight ? .moduleAccent : UIColor(hex: "47438b")
+        
+        tabBar.tintColor = .white
+        tabBar.unselectedItemTintColor = .white.withAlphaComponent(0.7)
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+    }
+    
     // MARK: - BINDER
     
     public override func bind() {
@@ -110,6 +123,15 @@ public final class TabBarController: BaseTabBarController {
             .sink { [weak self] status in
                 guard let self else { return }
                 handleLocationStatus(status)
+            }
+            .store(in: &subscriptions)
+        
+        NotificationCenter.default
+            .publisher(appNotif: .didRequireUpdateLocationBackground)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self, let isDaylight = notification.object as? Bool else { return }
+                self.updateTabBarAppearance(isDaylight: isDaylight)
             }
             .store(in: &subscriptions)
     }

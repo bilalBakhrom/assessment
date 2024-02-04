@@ -69,10 +69,17 @@ extension ForecastViewModel {
         isFetchingForecast = true
         
         do {
+            // Create a request model.
             let model = RMForecast(lat: lat, lon: lon)
+            // Fetch forecase data.
             let response = try await weatherRepo.fetchForecast(model: model)
-            content = ForecastContent(from: response)
+            // Convert data.
+            let content = ForecastContent(from: response)
+            // Cache data.
             applicationSettings.forecastContent = content
+            applicationSettings.isDaylight = content.isDaylight
+            // Update local data.
+            self.content = content
         } catch {
             reportError(error)
         }

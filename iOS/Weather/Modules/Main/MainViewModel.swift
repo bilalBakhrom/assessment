@@ -116,6 +116,7 @@ extension MainViewModel {
     private func fetchWeatherDetails(lat: Double, lon: Double) async {
         guard !isFetchingWeatherDetails else { return }
         
+        // If network is unreachable, then use cached data.
         if !networkMonitor.isReachable {
             details = applicationSettings.weatherDetails
             return
@@ -124,10 +125,22 @@ extension MainViewModel {
         isFetchingWeatherDetails = true
         
         do {
+            // Create a request model.
             let model = RMLocation(lat: lat, lon: lon)
+            // Fetch weather details.
             let response = try await weatherRepo.fetchWeatherDetails(with: model)
-            details = WeatherDetails(from: response)
+            // Convert details.
+            let details = WeatherDetails(from: response)
+            // Cache data locally.
             applicationSettings.weatherDetails = details
+            applicationSettings.isDaylight = details.isDaylight
+            // Update data locally.
+            self.details = details
+            // Notify subscribers that app did receive weather details.
+            NotificationCenter.default.post(
+                appNotif: .didRequireUpdateLocationBackground,
+                object: details.isDaylight
+            )
         } catch {
             reportError(error)
         }

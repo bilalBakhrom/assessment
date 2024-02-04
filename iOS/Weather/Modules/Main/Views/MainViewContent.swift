@@ -105,7 +105,7 @@ struct MainViewContent: View {
                         Button {
                             Task { await viewModel.sendEvent(.removeSelectedCity) }
                         } label: {
-                            Text("Remove")
+                            Text("Remove selection: \(String(locationManager.placeMark?.country ?? details.name ?? "").uppercased())")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundStyle(Color.moduleMainRed)
                         }

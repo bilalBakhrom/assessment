@@ -13,6 +13,15 @@ public struct ForecastContent: Codable {
     public let numberOfDays: Int
     public let list: [Forecast]
     
+    public var isDaylight: Bool {
+        guard let sunsetTimestamp = city.sunsetTimestamp, let sunriseTimestamp = city.sunriseTimestamp else {
+            return true
+        }
+        
+        let currentTime = Date().timeIntervalSince1970
+        return currentTime >= TimeInterval(sunriseTimestamp) && currentTime <= TimeInterval(sunsetTimestamp)
+    }
+    
     public init(
         city: City?,
         numberOfDays: Int?,

@@ -14,6 +14,8 @@ public final class ApplicationSettings {
     public static let shared = ApplicationSettings()
     private let storage: StorageKeyDefaults<ApplicationStorageKey>
     
+    public var isDaylight: Bool = false
+    
     private init() {
         storage = StorageKeyDefaults(suiteName: "group.com")
         storage.register(defaults: [

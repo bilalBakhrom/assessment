@@ -97,7 +97,7 @@ final class ForecastController: BaseViewController {
     
     override func activateSubviewsConstraints() {
         NSLayoutConstraint.activate([
-            rootView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            rootView.topAnchor.constraint(equalTo: view.topAnchor),
             rootView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             rootView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             rootView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

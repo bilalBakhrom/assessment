@@ -12,6 +12,8 @@ import AppColors
 struct ForecastView: View {
     @ObservedObject var viewModel: ForecastViewModel
     
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
+    
     init(viewModel: ForecastViewModel) {
         self.viewModel = viewModel
     }
@@ -27,10 +29,15 @@ struct ForecastView: View {
                 content
             }
         }
-        .background(Color.modulePrimaryBackground)
+        .ignoresSafeArea()
+        .background(
+            (viewModel.content?.isDaylight ?? viewModel.applicationSettings.isDaylight)
+            ? LinearGradient.daylightGradient
+            : LinearGradient.nightGradient
+        )
     }
     
-    @ViewBuilder private var content: some View {
+    private var content: some View {
         ZStack {
             if let content = viewModel.content {
                 AUIList {
@@ -56,5 +63,6 @@ struct ForecastView: View {
                 .listStyle(.grouped)
             }
         }
+        .padding(.top, safeAreaInsets.top)
     }
 }
